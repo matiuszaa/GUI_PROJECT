@@ -1,0 +1,23 @@
+.DashboardLayout {
+  display: flex;
+  margin: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#left_column_container {
+}
+
+#right_column_container {
+}
+
+#orders_and_quality_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#orders_container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}

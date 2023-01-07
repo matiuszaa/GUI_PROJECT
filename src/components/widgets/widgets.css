@@ -1,0 +1,79 @@
+.CustomerFeedbackWidget {
+  width: 500px;
+  height: 600px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 600px;
+}
+
+.OfferRankingWidget {
+  width: 500px;
+  height: 400px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 400px;
+}
+
+.SalesAdviceWidget {
+  width: 500px;
+  height: 170px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 170px;
+}
+
+.SalesChartWidget {
+  width: 500px;
+  height: 300px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 300px;
+}
+
+.SalesQualityWidget {
+  width: 310px;
+  height: 300px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 300px;
+}
+
+.ReturnedOrdersWidget {
+  width: 160px;
+  height: 80px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 80px;
+}
+
+.UnpaidOrdersWidget {
+  width: 160px;
+  height: 80px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 80px;
+}
+
+.UnshippedOrdersWidget {
+  width: 160px;
+  height: 80px;
+  padding: 15px;
+
+  text-align: center;
+  vertical-align: center;
+  line-height: 80px;
+}
