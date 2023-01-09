@@ -1,0 +1,36 @@
+.orders {
+  position: relative;
+}
+
+.paper {
+  width: 100%;
+  padding: 30px;
+}
+
+.tp {
+  padding: 6px;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.tp div {
+  position: absolute;
+  display: inline-block;
+  right: 5px;
+}
+
+.line {
+  margin-left: 2px;
+}
+
+.tp span {
+  display: inline-block;
+  padding: 5px 3px;
+  top: 50%;
+}
+
+.tabpanel {
+  position: absolute;
+}

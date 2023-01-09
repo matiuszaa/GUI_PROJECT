@@ -3,6 +3,7 @@ import { SalesChartWidget } from "./../widgets/SalesChartWidget";
 import { CustomerFeedbackWidget } from "./../widgets/CustomerFeedbackWidget";
 import "./dashboardLayout.css";
 import OfferRankingWidget from "../widgets/OfferRankingWidget";
+import { OrderWidget } from "../widgets/OrderWidget/OrderWidget";
 
 export class DashboardLayout extends React.Component {
   constructor(props) {
@@ -12,11 +13,14 @@ export class DashboardLayout extends React.Component {
   render() {
     return (
           <div className="DashboardLayout">
-            <OfferRankingWidget />
+            <div>
+              <OfferRankingWidget />
+              <OrderWidget />
+            </div>
             <div id="right_column_container">
               <CustomerFeedbackWidget />
             </div>
-             <SalesChartWidget/>
-            </div>
+            <SalesChartWidget/>
+          </div>
         )}
   }
