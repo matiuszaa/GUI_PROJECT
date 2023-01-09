@@ -1,6 +1,8 @@
 import React from "react";
 import { SalesChartWidget } from "./../widgets/SalesChartWidget";
+import { CustomerFeedbackWidget } from "./../widgets/CustomerFeedbackWidget";
 import "./dashboardLayout.css";
+import OfferRankingWidget from "../widgets/OfferRankingWidget";
 
 export class DashboardLayout extends React.Component {
   constructor(props) {
@@ -10,23 +12,11 @@ export class DashboardLayout extends React.Component {
   render() {
     return (
           <div className="DashboardLayout">
-            <div id="left_column_container">
-              <SalesChartWidget />
-              <SalesChartWidget />
-              <SalesChartWidget />
-            </div>
-
+            <OfferRankingWidget />
             <div id="right_column_container">
-              <div id="orders_and_quality_container">
-                <div id="orders_container">
-                    <SalesChartWidget />
-                    <SalesChartWidget />
-                    <SalesChartWidget />
-                </div>
-                <SalesChartWidget />
-              </div>
-              <SalesChartWidget />
+              <CustomerFeedbackWidget />
             </div>
-          </div>
+             <SalesChartWidget/>
+            </div>
         )}
   }

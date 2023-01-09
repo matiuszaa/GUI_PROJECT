@@ -1,15 +1,6 @@
-.CustomerFeedbackWidget {
-  width: 500px;
-  height: 600px;
-  padding: 15px;
-
-  text-align: center;
-  vertical-align: center;
-  line-height: 600px;
-}
 
 .OfferRankingWidget {
-  width: 500px;
+  width: 750px;
   height: 400px;
   padding: 15px;
 
@@ -29,8 +20,8 @@
 }
 
 .SalesChartWidget {
-  width: 500px;
-  height: 300px;
+  width: 1000px;
+  height: 1000px;
   padding: 15px;
 
   text-align: center;
@@ -77,3 +68,7 @@
   vertical-align: center;
   line-height: 80px;
 }
+
+.WidgetsPadding {
+    padding: 30px;
+  }

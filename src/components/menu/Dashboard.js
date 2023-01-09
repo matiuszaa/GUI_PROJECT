@@ -9,7 +9,7 @@ export class Dashboard extends React.Component {
   render() {
     return (
           <div className="Dashboard">
-            <DashboardLayout />
+            <DashboardLayout className="DashboardLayout" />
           </div>
         )}
   }
