@@ -3,6 +3,7 @@
   margin: 15px;
   justify-content: space-between;
   flex-wrap: wrap;
+  /* flex-direction: column; */
 }
 
 #left_column_container {
@@ -20,4 +21,11 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.logout {
+  position: fixed;
+  padding: 5px;
+  top: 0;
+  left: 0;
 }
