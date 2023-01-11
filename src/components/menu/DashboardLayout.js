@@ -19,16 +19,18 @@ export class DashboardLayout extends React.Component {
     <Translation>
         {(ln) => (
           <div className="DashboardLayout">
-            <OrderWidget />
-            <SalesAdviceWidget />
-            <OfferRankingWidget data={this.props.offerData}/>
-
-            <div id="right_column_container">
-            <SalesQualityWidget />
-
-            </div>
-            <CustomerFeedbackWidget data={this.props.feedbackData}/>
+            <div id="FirstRow">
             <SalesChartWidget data={this.props.salesChartData}/>
+            <SalesQualityWidget />
+            </div>
+            <div id="SecondRow">
+            <OfferRankingWidget data={this.props.offerData}/>
+            <SalesAdviceWidget />
+            </div>
+            <div id = "ThirdRow">
+            <OrderWidget />
+            <CustomerFeedbackWidget data={this.props.feedbackData}/>
+            </div>
             </div>
         )}
     </Translation>

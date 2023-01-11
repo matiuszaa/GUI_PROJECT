@@ -1,11 +1,12 @@
 .Dashboard {
+    padding: 50px;
   width: 100%;
 }
 
 .DashboardLayout {
   display: flex;
   padding: 20px;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 
 }

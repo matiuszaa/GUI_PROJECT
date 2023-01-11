@@ -1,23 +1,19 @@
 .DashboardLayout {
-  display: flex;
-  margin: 15px;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    margin: 70px;
 }
 
-#left_column_container {
+#FirstRow {
+    display: flex;
+    justify-content: space-between;
 }
 
-#right_column_container {
+#SecondRow {
+    display: flex;
+    justify-content: space-between;
 }
 
-#orders_and_quality_container {
-  display: flex;
-  justify-content: space-between;
+#ThirdRow {
+    display: flex;
+    justify-content: space-between;
 }
 
-#orders_container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
