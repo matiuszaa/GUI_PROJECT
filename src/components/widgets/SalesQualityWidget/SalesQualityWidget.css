@@ -1,60 +1,24 @@
-.box {
-  box-sizing: border-box;
-  /* padding: 15px; */
-  /* width: 100%; */
-  height: 85px;
-  position: relative;
-  border-bottom: solid 1px rgb(99, 99, 99);
-}
-
-.box span {
-  display: block;
-  position: absolute;
-  line-height: 30px;
-}
-
-.quality {
+.header {
   line-height: 50px;
+}
+
+.tablist {
   border-bottom: 1px solid black;
 }
 
-.box .name {
-  left: 50%;
-  transform: translateX(-50%);
+.tabpanel {
+  height: 420px;
+  position: relative;
 }
 
-.box .zero {
-  left: 5px;
-  bottom: 0px;
-}
-
-.box .size {
-  right: 5px;
-  bottom: 0px;
-}
-
-.box .current {
-  transform: translateX(-50%);
-  bottom: 30px;
-}
-
-.bar {
+.progres {
   position: absolute;
-  bottom: 28px;
-  left: 5px;
-  right: 5px;
+  left: 10px;
+  right: 10px;
+  bottom: 40px;
 }
 
-.result {
-  height: 165px;
-  line-height: normal;
-}
-
-.result div {
-  padding: 3px;
-  text-align: left;
-}
-
-.result div ul {
-  margin: 1px;
+.basaspects {
+  position: absolute;
+  bottom: 30px;
 }

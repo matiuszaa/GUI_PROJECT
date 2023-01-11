@@ -1,15 +1,17 @@
 .offerRankingHeader {
-    display: flex;
-    justify-content: space-between;
-  }
+  display: flex;
+  justify-content: space-between;
+}
 
-  .OfferRankingWidget {
-    width: 750px;
-    height: 400px;
-    padding: 15px;
-  
-    text-align: center;
-    vertical-align: center;
-    line-height: 40px;
-  }
-  
+.OfferRankingWidget {
+  width: 800px;
+  height: 500px;
+  padding-left: 15px;
+  text-align: center;
+  vertical-align: center;
+  line-height: 40px;
+}
+
+.WidgetsPadding {
+  height: calc(500px - 30px);
+}

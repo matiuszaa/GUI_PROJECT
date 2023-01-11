@@ -48,7 +48,12 @@ i18n
             previous: "previous",
             day: "day",
             week: "week",
-            year: "year"
+            year: "year",
+            unPaid: "not paid",
+            notSend: "not send",
+            returned: 'returned',
+            seeMore: 'see more',
+            seeAdvice: 'see advice',
         }
       },
       pl: {
@@ -95,7 +100,13 @@ i18n
             moneyGained: "Zarobiono",
             current: "obecny",
             previous: "poprzedni",
-            rank: "Numer"
+            rank: "Numer",
+
+            unPaid: "nie opłacone",
+            notSend: "nie wysłane",
+            returned: 'zwroty',
+            seeMore: 'zobacz więcej',
+            seeAdvice: 'zobacz porade',
         }
       }
     },

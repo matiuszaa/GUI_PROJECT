@@ -4,34 +4,11 @@ import "./SalesQualityWidget.css"
 import {
   Paper, Typography,
 } from "@mui/material";
-import { Box, LinearProgress } from "@material-ui/core";
+import { Box, Card, CardContent, Tab } from "@material-ui/core";
 import { useEffect } from "react";
-
-const Bar = ({name, size, current}) => {
-  const [progress, setProgress] = useState(current / size * 100);
-  const px = 300;
-
-  const left = () => {
-    if (size === 0) {
-      return 0.5 * px + 'px';
-    } else {
-      return (current/size < 0.032 ? 0.032 : current/size > 0.94 ? 0.94 : current/size) * px + 'px'
-    } 
-
-  }
-
-  return (
-    <div className="box">
-      <span className="name">{name}</span>
-      <span className="zero">0</span>
-      <span className="size">{size}</span>
-      <span className="current" style={{left: left()}}>{size === 0 ? "Brak danych" : current}</span>
-      <Box className="bar" sx={{ width: '100%' }}>
-        <LinearProgress variant="determinate" value={progress}/>
-      </Box>
-    </div>
-  )
-}
+import { TabContext, TabList, TabPanel } from "@material-ui/lab";
+import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
+import {styled} from '@mui/material/styles'
 
 const ocean = [
   {
@@ -61,6 +38,60 @@ const ocean = [
   }
 ]
 
+const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
+  height: 10,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+  },
+}));
+
+function LinearProgressWithLabel(props) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{  mr: 1 }}>
+        <LinearProgress thickness={4} variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value,
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+const QualityPanel = ({value, o}) => {
+  return (
+    <TabPanel className="tabpanel" value={value}>
+      <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+        Maksymalna ocena: {o.size}
+      </Typography>
+      <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+        Minimalna ocena: {0}
+      </Typography>
+      <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+        Obecna ocena: {o.current}
+      </Typography>
+      {
+        o.size === 0 
+        ? <p>Jeszcze nie obsługiwane</p>
+        : null
+      }
+      <div className="progres">
+        <BorderLinearProgress 
+          variant="determinate" 
+          value={o.size !== 0 ? o.current / o.size * 100 : 0} 
+        />
+      </div>
+    </TabPanel>
+  )
+}
+
 export const SalesQualityWidget = () => {
   let [suma, setSuma] = useState(0);
   let [suma1, setSuma1] = useState(0);
@@ -76,13 +107,20 @@ export const SalesQualityWidget = () => {
     setSuma1(suma1);
   }, [])
 
-  const result = ocean.map((o, idx) => {
-    return (
-      <Bar key={idx} name={o.name} size={o.size} current={o.current}/>
-    )
-  })
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-  const list = [...ocean].sort((a, b) => a.current / a.size > b.current / b.size ? 1 : -1).slice(0,3)
+  const panels = ocean.map((o, idx) => 
+    <QualityPanel value={idx + 1} o={o} />
+  )
+
+  const list = [...ocean].sort((a, b) => 
+    a.current / a.size > b.current / b.size ? 1 : -1
+  ).filter(a => a.size !== 0).slice(0,3).map(a => 
+    <li>{a.name}</li>
+  )
 
   const wynik = <strong>{
     (suma / suma1 * 100) <= 20 ? "Jest źle" : 
@@ -102,7 +140,54 @@ export const SalesQualityWidget = () => {
           height: "100%"
         }}
       >
-        <div className="quality"><Typography variant="tableAndNameHeaders">Ocena jakości</Typography></div>
+        <div className="header">
+          <Typography
+              variant="widgetHeader"
+          >
+            Ocena jakości
+          </Typography>
+        </div>
+
+        <Box sx={{ width: '100%', typography: 'body1' }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList className="tablist" onChange={handleChange} aria-label="lab API tabs example">
+                <Tab label={<Typography variant="tableAndNameHeaders">Ogólne</Typography>} value={0} />
+                <Tab label={<Typography variant="tableAndNameHeaders">Sprzedaż</Typography>} value={1} />
+                <Tab label={<Typography variant="tableAndNameHeaders">Ocena klientów</Typography>} value={2} />
+                <Tab label={<Typography variant="tableAndNameHeaders">Zwroty</Typography>} value={3} />
+                <Tab label={<Typography variant="tableAndNameHeaders">Szybkość obsługi</Typography>} value={4} />
+                <Tab label={<Typography variant="tableAndNameHeaders">Ceny</Typography>} value={5} />
+              </TabList>
+            </Box>
+              <TabPanel className="tabpanel" value={0}>
+                <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+                  Maksymalna ogólna ocena: {suma1}
+                </Typography>
+                <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+                  Obecna ogólna ocena: {suma}
+                </Typography>
+                <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+                  Kategoria: {wynik}
+                </Typography>
+
+                <div className="basaspects">
+                  <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
+                    Najgorsze aspekty: 
+                    <ul>
+                      {console.log(list)}
+                      {list}
+                    </ul>
+                  </Typography>
+                </div>
+
+              </TabPanel>
+              {panels}
+          </TabContext>
+        </Box>
+
+
+        {/* <div className="quality"><Typography variant="tableAndNameHeaders">Ocena jakości</Typography></div>
         <div>
         <Typography variant="tableContent">{result}</Typography>
         </div>
@@ -123,7 +208,7 @@ export const SalesQualityWidget = () => {
               }
             </ul>
           </div>
-        </div>
+        </div> */}
       </Paper>
     </div>
     )

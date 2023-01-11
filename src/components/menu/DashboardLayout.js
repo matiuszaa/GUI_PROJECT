@@ -8,6 +8,7 @@ import { Translation } from "react-i18next";
 import { OrderWidget } from "../widgets/OrderWidget/OrderWidget";
 import {SalesQualityWidget } from '../widgets/SalesQualityWidget/SalesQualityWidget'
 import {SalesAdviceWidget} from '../widgets/SalesAdviceWidget';
+import { Grid } from "@mui/material";
 
 export class DashboardLayout extends React.Component {
   constructor(props) {
@@ -20,18 +21,18 @@ export class DashboardLayout extends React.Component {
         {(ln) => (
           <div className="DashboardLayout">
             <div id="FirstRow">
-            <SalesChartWidget data={this.props.salesChartData}/>
-            <SalesQualityWidget />
+              <SalesChartWidget data={this.props.salesChartData}/>
+              <OfferRankingWidget data={this.props.offerData}/>
             </div>
             <div id="SecondRow">
-            <OfferRankingWidget data={this.props.offerData}/>
-            <SalesAdviceWidget />
+              <CustomerFeedbackWidget data={this.props.feedbackData}/>
+              <div className="rightSecondRow">
+                <OrderWidget />
+                <SalesQualityWidget />
+                <SalesAdviceWidget />
+              </div>
             </div>
-            <div id = "ThirdRow">
-            <OrderWidget />
-            <CustomerFeedbackWidget data={this.props.feedbackData}/>
-            </div>
-            </div>
+          </div>
         )}
     </Translation>
         )}

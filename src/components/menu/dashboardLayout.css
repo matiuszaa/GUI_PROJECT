@@ -1,13 +1,15 @@
 .DashboardLayout {
-    margin: 70px;
+    margin: 50px;
 }
 
 #FirstRow {
+    width: 80vw !important;
     display: flex;
     justify-content: space-between;
 }
 
 #SecondRow {
+    width: 80vw !important;
     display: flex;
     justify-content: space-between;
 }
@@ -17,3 +19,9 @@
     justify-content: space-between;
 }
 
+.rightSecondRow {
+    position: relative;
+    width: calc(100% - 550px);
+    padding: 20px 0 0 15px;
+    height: 100px;
+}

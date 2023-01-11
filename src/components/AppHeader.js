@@ -28,14 +28,17 @@ export class AppHeader extends React.Component {
         <Translation>
             {(ln) => (
             <div className="AppHeader">
-                <div className="ItemsPaddingMargin">
-                    <Typography variant="titleHeader">
-                        Dashboard
-                    </Typography>
+                <Typography className="title" variant="titleHeader">
+                    Dashboard
+                </Typography>
+                <div className="theme">
                 </div>
-                <div>
-                    <Avatar src={this.state.langImage === enPicture ? enPicture : plPicture} style={{width: 40, height: 40, borderRadius: 0, paddingTop: 25, paddingRight: 40, }} onClick={this.handleLanguageChange}/>
-                </div>
+                <Avatar 
+                    id="avatar" 
+                    src={this.state.langImage === enPicture ? plPicture : enPicture}  
+                    onClick={this.handleLanguageChange}
+                    // style={{ borderRadius: 0}}
+                />
             </div>
         )}
         </Translation>

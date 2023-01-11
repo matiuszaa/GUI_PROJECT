@@ -82,7 +82,7 @@ export class SalesChartWidget extends React.Component {
     return (
     <Translation>
     {(ln) => (
-      <div>
+      <div className='charWidget'>
         <Paper sx={{
                 boxShadow: 4,
                 borderRadius: 5,

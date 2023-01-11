@@ -1,29 +1,7 @@
 .Dashboard {
-    padding: 50px;
   width: 100%;
 }
 
 .DashboardLayout {
-  display: flex;
-  padding: 20px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-}
-
-#left_column_container {
-}
-
-#right_column_container {
-}
-
-#orders_and_quality_container {
-  display: flex;
-  justify-content: space-between;
-}
-
-#orders_container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  
 }
