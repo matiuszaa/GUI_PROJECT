@@ -9,31 +9,32 @@ import { useEffect } from "react";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
 import {styled} from '@mui/material/styles'
+import { Translation } from "react-i18next";
 
 const ocean = [
   {
     size: 100,
-    name: 'Sprzedaż',
+    name: 'qualitySales',
     current: 50,
   },
   {
     size: 60,
-    name: 'Ocena klientów',
+    name: 'qualityClients',
     current: 20,
   },
   {
     size: 20,
-    name: 'Zwroty',
+    name: 'qualityReturn',
     current: 16,
   },
   {
     size: 80,
-    name: 'Szybkość obsługi',
+    name: 'qualityService',
     current: 60,
   },
   {
     size: 0,
-    name: 'Ceny',
+    name: 'qualityPrices',
     current: 0,
   }
 ]
@@ -65,21 +66,21 @@ function LinearProgressWithLabel(props) {
   );
 }
 
-const QualityPanel = ({value, o}) => {
+const QualityPanel = ({value, o, ln}) => {
   return (
     <TabPanel className="tabpanel" value={value}>
       <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-        Maksymalna ocena: {o.size}
+        {ln('qualityElemMax')}: {o.size}
       </Typography>
       <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-        Minimalna ocena: {0}
+        {ln('qualityElemMin')}: {0}
       </Typography>
       <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-        Obecna ocena: {o.current}
+        {ln('qualityElemCurrent')}: {o.current}
       </Typography>
       {
         o.size === 0 
-        ? <p>Jeszcze nie obsługiwane</p>
+        ? <p>{ln('qualityNotImplemented')}</p>
         : null
       }
       <div className="progres">
@@ -112,24 +113,16 @@ export const SalesQualityWidget = () => {
     setValue(newValue);
   };
 
-  const panels = ocean.map((o, idx) => 
-    <QualityPanel value={idx + 1} o={o} />
-  )
-
-  const list = [...ocean].sort((a, b) => 
-    a.current / a.size > b.current / b.size ? 1 : -1
-  ).filter(a => a.size !== 0).slice(0,3).map(a => 
-    <li>{a.name}</li>
-  )
-
-  const wynik = <strong>{
-    (suma / suma1 * 100) <= 20 ? "Jest źle" : 
-    (suma / suma1 * 100) <= 40 ? "Tragedi nie ma" : 
-    (suma / suma1 * 100) <= 60 ? "Może być" : 
-    (suma / suma1 * 100) <= 80 ? "Jest nieźle" : 
-    (suma / suma1 * 100) <= 100 ? "Genialnie" : null}</strong>
+  const wynik = (ln) => (<strong>{
+    (suma / suma1 * 100) <= 20 ? ln('qualityBad') : 
+    (suma / suma1 * 100) <= 40 ? ln('qualiztyNotToBad') : 
+    (suma / suma1 * 100) <= 60 ? ln('qualityItsOk') : 
+    (suma / suma1 * 100) <= 80 ? ln('qualityNotBad') : 
+    (suma / suma1 * 100) <= 100 ? ln('qualityVeryGood') : null}</strong>)
 
   return (
+    <Translation>
+    {(ln) => (
     <div className="SalesQualityWidget">
       <Paper
         sx={{
@@ -144,7 +137,7 @@ export const SalesQualityWidget = () => {
           <Typography
               variant="widgetHeader"
           >
-            Ocena jakości
+            {ln('qualityName')}
           </Typography>
         </div>
 
@@ -152,37 +145,42 @@ export const SalesQualityWidget = () => {
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList className="tablist" onChange={handleChange} aria-label="lab API tabs example">
-                <Tab label={<Typography variant="tableAndNameHeaders">Ogólne</Typography>} value={0} />
-                <Tab label={<Typography variant="tableAndNameHeaders">Sprzedaż</Typography>} value={1} />
-                <Tab label={<Typography variant="tableAndNameHeaders">Ocena klientów</Typography>} value={2} />
-                <Tab label={<Typography variant="tableAndNameHeaders">Zwroty</Typography>} value={3} />
-                <Tab label={<Typography variant="tableAndNameHeaders">Szybkość obsługi</Typography>} value={4} />
-                <Tab label={<Typography variant="tableAndNameHeaders">Ceny</Typography>} value={5} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySummarise')}</Typography>} value={0} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySales')}</Typography>} value={1} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityClients')}</Typography>} value={2} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityReturn')}</Typography>} value={3} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityService')}</Typography>} value={4} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityPrices')}</Typography>} value={5} />
               </TabList>
             </Box>
               <TabPanel className="tabpanel" value={0}>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-                  Maksymalna ogólna ocena: {suma1}
+                  {ln('qualityMaxMark')}: {suma1}
                 </Typography>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-                  Obecna ogólna ocena: {suma}
+                  {ln('qualityCurrentMark')}: {suma}
                 </Typography>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-                  Kategoria: {wynik}
+                  {ln('qualityCategory')}: {wynik(ln)}
                 </Typography>
 
                 <div className="basaspects">
                   <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-                    Najgorsze aspekty: 
+                    {ln('qualityAspectsBad')}: 
                     <ul>
-                      {console.log(list)}
-                      {list}
+                      {[...ocean].sort((a, b) => 
+                        a.current / a.size > b.current / b.size ? 1 : -1
+                      ).filter(a => a.size !== 0).slice(0,3).map(a => 
+                        <li>{ln(a.name)}</li>
+                      )}
                     </ul>
                   </Typography>
                 </div>
 
               </TabPanel>
-              {panels}
+              {ocean.map((o, idx) => 
+                <QualityPanel value={idx + 1} o={o} ln={ln} />
+              )}
           </TabContext>
         </Box>
 
@@ -211,5 +209,7 @@ export const SalesQualityWidget = () => {
         </div> */}
       </Paper>
     </div>
+    )}
+    </Translation>
     )
 }

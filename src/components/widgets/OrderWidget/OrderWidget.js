@@ -15,17 +15,19 @@ export const OrderWidget = () => {
     setValue(newValue);
   };
 
-  const TP = ({value, content}) => {
+  const TP = ({value, content, ln}) => {
     return (
       <TabPanel value={value}>
         <div className="tp">
           <span><Typography variant="tableContent">Ilość:</Typography> </span>
           <span>{content}</span>
           <div>
-            <CustomToggleButton style={{backgroundColor: "#ce6d1e"}} size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">Zobacz więcej</Typography></CustomToggleButton>
+            <CustomToggleButton style={{backgroundColor: "#ce6d1e"}} size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
+              {ln('seeMore')}</Typography></CustomToggleButton>
             {
               content === 0
-              ? <CustomToggleButton style={{backgroundColor: "lightblue"}} className='line' size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">Może pomocy</Typography></CustomToggleButton>
+              ? <CustomToggleButton style={{backgroundColor: "lightblue"}} className='line' size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
+                {ln('seeAdvice')}</Typography></CustomToggleButton>
               : null 
             }
           </div>
@@ -47,14 +49,14 @@ export const OrderWidget = () => {
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList onChange={handleChange} aria-label="lab API tabs example">
-                <Tab  label={<Typography variant = "tableAndNameHeaders">{ln('unPaid')}</Typography>} value="1" />
+                <Tab label={<Typography variant = "tableAndNameHeaders">{ln('unPaid')}</Typography>} value="1" />
                 <Tab label={<Typography variant = "tableAndNameHeaders">{ln("notSend")}</Typography>} value="2" />
                 <Tab label={<Typography variant = "tableAndNameHeaders">{ln("returned")}</Typography>} value="3" />
               </TabList>
             </Box>
-            <TP value={'1'} content={120} />
-            <TP value={'2'} content={3} />
-            <TP value={'3'} content={0} />
+            <TP value={'1'} content={120} ln={ln} />
+            <TP value={'2'} content={3} ln={ln}/>
+            <TP value={'3'} content={0} ln={ln}/>
           </TabContext>
         </Box>
         </Paper>
