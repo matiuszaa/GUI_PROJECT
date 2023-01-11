@@ -1,0 +1,25 @@
+.salesChartWidgetHeader {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px
+}
+
+.salesChartWidgetChartButtons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 25px;
+    padding-right: 158px;
+}
+
+.buttonsWidget {
+    padding-right: 40px;
+    padding-left: 40px;
+    display: "flex";
+    flex-direction: column;
+    align-items: left;
+    max-width: 300;
+    max-height: 300;
+}
+.button-spacing {
+    margin-bottom: 10px;
+  }

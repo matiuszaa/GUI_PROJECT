@@ -10,38 +10,37 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
+import { Translation } from 'react-i18next'
+import { Select, MenuItem } from "@mui/material";
 
-const CustomMenuItem = styled(MenuItem)({
-    color: "#f47933",
+
+const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
+    color: "#009933",
     fontSize: 13,
-    fontWeight: 500,
+    fontWeight: 800,
     fontFamily: "Montserrat"
-  });
+  }));
   
-const CustomSelect = styled(Select)({
-    backgroundColor: "#fff8ef",
-    color: "#f47933",
+const CustomSelect = styled(Select)(({ theme }) => ({
+    backgroundColor: "#FFE4B5",
+    color: "#009933",
     fontSize: 13,
     fontFamily: "Montserrat",
-    fontWeight: 500,
+    fontWeight: 800,
     height: 30,
-    width: 160,
+    width: 120,
     "& .MuiSelect-icon": {
-      color: "#f47933"
+      color: "#009933"
     },
     "&& fieldset": {
       border: "1px solid #FDAA4A"
     },
     "&:hover": {
       "&& fieldset": {
-        border: "1px solid #f47933"
+        border: "1px solid #F47933"
       }
     }
-  });
+  }));
   
 
 
@@ -56,72 +55,39 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: theme.spacing(2),
   },
-  title: {
-    color: '#ffd700', // golden color
+  h2: {
+    fontWeight: 800,
+    fontSize: "1.35em",
+    fontFamily: "Montserrat",
+    paddingBottom: 0,
+    color: '#ce6d1e'
   },
-  formControl: {
-    minWidth: 120,
-    marginLeft: theme.spacing(2),
-    color: '#ffc0cb', // light pink color
-  },
+
 }
 ));
 
-const Header = () => {
-    const classes = useStyles();
-  
-    return (
-      <div className={classes.header}>
-        <Typography variant="h6" className={classes.title}>
-          Offer Ranking
-        </Typography>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Filter</InputLabel>
-                <CustomSelect value='lalala'
-                      displayEmpty
-                      inputProps={{
-                        "aria-label": "Without label"
-                      }}>
-            <CustomMenuItem value={10}>Ten</CustomMenuItem>
-            <CustomMenuItem value={20}>Twenty</CustomMenuItem>
-            <CustomMenuItem value={30}>Thirty</CustomMenuItem>
-          </CustomSelect>
-        </FormControl>
-      </div>
-    );
+export class OfferRankingWidget extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedValue: "najlepsze",
+            offerData: this.props.data.bestOffers,
+        };
+        this.changeHandler = this.changeHandler.bind(this);
+      }
+
+  changeHandler = (event) => {
+    event.target.value === "najlepsze" ? this.setState
+    ({selectedValue: "najlepsze", offerData : this.props.data.bestOffers}) : 
+    this.setState({ selectedValue: "najgorsze", offerData: this.props.data.worstOffers})
   };
 
-const OfferRanking = () => {
-  const classes = useStyles();
-
-  // Mocked data for offers
-  const offers = [
-    {
-      id: 1,
-      name: 'Offer 1',
-      image: '/path/to/image1.jpg',
-      piecesSold: 100,
-      moneyGained: 1000,
-    },
-    {
-      id: 2,
-      name: 'Offer 2',
-      image: '/path/to/image2.jpg',
-      piecesSold: 50,
-      moneyGained: 500,
-    },
-    {
-      id: 3,
-      name: 'Offer 3',
-      image: '/path/to/image3.jpg',
-      piecesSold: 25,
-      moneyGained: 250,
-    },
-  ];
-
+render(){
   return (    
+<Translation>
+{(ln) => (
+
 <div className='OfferRankingWidget'>
 <Paper sx={{
                 boxShadow: 4,
@@ -138,24 +104,38 @@ flexDirection: "column",
 justifyContent: "flex-start"
 }}
 >
-  <Header></Header>
+    <div style={{    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'}}>
+    <Typography className={useStyles.h2}>
+        {ln("offerRanking")}
+    </Typography>
+    <CustomSelect onChange={this.changeHandler}>
+            <CustomMenuItem value={"najlepsze"}>
+            najlepsze
+            </CustomMenuItem>
+            <CustomMenuItem value={"najgorsze"}>
+            najgorsze
+            </CustomMenuItem>
+        </CustomSelect>
+    </div>
     <TableContainer>
-      <Table className={classes.table} aria-label="custom table"
+      <Table className={useStyles.table} aria-label="custom table"
         sx={{
             [`& .${tableCellClasses.root}`]: {
               borderBottom: "none"
             }
           }}>
         <TableHead>
-          <TableRow className={classes.row} sx={{ "& td": { border: 0 } }}>
-            <TableCell>Rank</TableCell>
-            <TableCell>Offer</TableCell>
-            <TableCell align="right">Pieces Sold</TableCell>
-            <TableCell align="right">Money Gained</TableCell>
+          <TableRow className={useStyles.row} sx={{ "& td": { border: 0 } }}>
+            <TableCell>{ln("rank")}</TableCell>
+            <TableCell>{ln("offer")}</TableCell>
+            <TableCell align="right">{ln("piecesTitle")}</TableCell>
+            <TableCell align="right">{this.state.selectedValue === "najlepsze" ? ln("moneyGained") : ln("viewTimes")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {offers.map((offer, index) => (
+          {this.state.offerData.map((offer, index) => (
             <TableRow key={offer.id}>
               <TableCell component="th" scope="row">
                 {index + 1}
@@ -164,7 +144,7 @@ justifyContent: "flex-start"
                 <Avatar src={offer.image} alt={offer.name} /> {offer.name}
               </TableCell>
               <TableCell align="right">{offer.piecesSold}</TableCell>
-              <TableCell align="right">{offer.moneyGained}</TableCell>
+              <TableCell align="right">{this.state.selectedValue === "najlepsze" ? offer.moneyGained : offer.viewTimes} zl</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -173,7 +153,9 @@ justifyContent: "flex-start"
     </div>
     </Paper>
     </div>
+)}
+</Translation>
   );
 };
+}
 
-export default OfferRanking;

@@ -1,16 +1,18 @@
 import React from 'react';
-import { makeStyles, createTheme } from '@material-ui/core/styles';
+import { makeStyles, styled } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Rating from '@material-ui/lab/Rating';
-import { Select } from '@material-ui/core'
 import {
     Paper, FormControl
   } from "@mui/material";
+  import { Select, MenuItem } from "@mui/material";
+import "./widgets.css"
 import Avatar from '@material-ui/core/Avatar';
 import "./CustomerFeedbackWidget.css"
+import { Translation } from 'react-i18next'
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,17 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inline: {
     display: 'inline',
-  },
-  select: {
-    '& .MuiSelect-root': {
-        display: 'inline',
-        width: '100%',
-        backgroundColor: 'orange',
-        color: 'white',
-        '& .MuiSelect-icon': {
-          color: 'white',
-        },
-      },
   },
   colors: {
     color: '#ce6d1e',
@@ -102,43 +93,51 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export function CustomerFeedbackWidget() {
-  const classes = useStyles();
+export const CustomMenuItem = styled(MenuItem)(({  }) => ({
+    color: "#009933",
+    fontSize: 13,
+    fontWeight: 500,
+    fontFamily: "Montserrat"
+  }));
+  
+  export const CustomSelect = styled(Select)(({  }) => ({
+    backgroundColor: "#FFE4B5",
+    color: "#009933",
+    fontSize: 13,
+    fontFamily: "Montserrat",
+    fontWeight: 800,
+    height: 30,
+    width: 160,
+    "& .MuiSelect-icon": {
+      color: "#009933"
+    },
+    "&& fieldset": {
+      border: "1px solid #FDAA4A"
+    },
+    "&:hover": {
+      "&& fieldset": {
+        border: "1px solid #F47933"
+      }
+    }
+  }));
 
-  const feedbackData = [
-    {
-      rating: 4.5,
-      text: 'This product is great! akonstantyopolis akonstantyopolis akonstantyopolis akonstantyopolis akonstantyopolis akonstantyopolis akonstantyopolisakonstantyopolisakonstantyopolis',
-      author: 'John Smith',
-      date: new Date('2022-01-01')
-    },
-    {
-      rating: 3,
-      text: 'It works as expectedsssssssssssssssssssssssssssssssssssssssssssssssssss s.lfasfsa',
-      author: 'Jane Doe',
-      date: new Date('2022-07-31')
-    },
-    {
-      rating: 5,
-      text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-      author: 'Robert Johnson',
-      date: new Date('2022-12-17')
-    },
-        {
-        rating: 0.5,
-        text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-        author: 'Robert Johnson',
-        date: new Date('2022-12-17')
-      },
-      {
-        rating: 0.5,
-        text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-        author: 'Robert Johnson',
-        date: new Date('2022-12-17')
-      },
-    ]
 
-  return (
+export class CustomerFeedbackWidget extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            feedbackData: this.props.data.best,
+        };
+        this.changeHandler = this.changeHandler.bind(this);
+      }
+    changeHandler(event){
+        event.target.value === "pozytywne" ? this.setState
+        ({feedbackData : this.props.data.best}) : this.setState({ feedbackData: this.props.data.worst})
+      };
+    render() {
+    return (
+    <Translation>
+    {(ln) => (
     <div className="CustomerFeedbackWidget">
         <Paper sx={{
                 boxShadow: 4,
@@ -153,22 +152,21 @@ export function CustomerFeedbackWidget() {
             <div className="customerFeedbackHeader">
               <div>
                 <Typography
-                    className={classes.h2}
+                    className={useStyles.h2}
                 >
-                    Opinia klientów
+                    {ln("customerFeedback")}
                 </Typography>
               </div>
-              <div className={classes.select}>
-                <Select>
-                        <option value="pozytywne">pozytywne</option>
-                        <option value="neutralne">neutralne</option>
-                        <option value="negatywne">negatywne</option>
-                    </Select>
+              <div>
+                <CustomSelect value={this.state.feedbackData} onChange={this.changeHandler}>
+                        <CustomMenuItem value="pozytywne">{ln("positiveOpinion")}</CustomMenuItem>
+                        <CustomMenuItem value="negatywne">{ln("negativeOpinion")}</CustomMenuItem>
+                    </CustomSelect>
                 </div>
             </div>
-            <List className={classes.root}>
-                {feedbackData.map((feedback) => (
-                <ListItem key={feedback.author} alignItems="flex-start">
+            <List className={useStyles.root}>
+                {this.state.feedbackData.map((feed) => (
+                <ListItem key={feed.author} alignItems="flex-start">
                     <ListItemAvatar>
                     <Avatar src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
@@ -176,26 +174,26 @@ export function CustomerFeedbackWidget() {
                     primary={
                         <div>
                             <Typography
-                                className={classes.h3}>
-                                {feedback.author}
+                                className={useStyles.h3}>
+                                {feed.author}
                             </Typography>
                             <Typography
                                 id="feedbackDateClientName"
-                                className={classes.h4}
+                                className={useStyles.h4}
                                 color="textSecondary">
-                                {Math.floor((new Date() - feedback.date) / (1000 * 60 * 60 * 24))} days ago
+                                {Math.floor((new Date() - feed.date) / (1000 * 60 * 60 * 24))} {ln("ago")}
                             </Typography>
-                            <Rating name="half-rating" precision={0.5} value={feedback.rating} size="small" readOnly="true" />
+                            <Rating name="half-rating" precision={0.5} value={feed.rating} size="small" readOnly="true" />
                         </div>
                         
                     }
                     secondary= {
                         <Typography
                         component="span"
-                        className={classes.h4}
+                        className={useStyles.h4}
                         color="textSecondary"
                     >
-                    {feedback.text}
+                    {feed.text}
                     </Typography>
                     }
                     style={{ wordBreak: 'break-all' }}
@@ -206,6 +204,8 @@ export function CustomerFeedbackWidget() {
         </div>
         </Paper>
         </div>
+    )}
+    </Translation>
   );
 }
-
+}
