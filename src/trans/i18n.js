@@ -7,7 +7,7 @@ i18n
     resources: {
       en: {
         translation: {
-            saleschart: "Sales Chart",
+            salesChart: "Sales Chart",
             offerRanking: "Offer Ranking",
             customerFeedback: "Customer Feedback",
             salesAdvice: "Sales Advice",
@@ -19,8 +19,9 @@ i18n
             negativeOpinion: "negative",
             allOpinions: "all",
             ago: "days ago",
-            piecesTitle: "pieces sold",
-            offer: "offer",
+            piecesTitle: "Pieces sold",
+            offer: "Offers",
+            rank: "Number",
             Jan: "Jan",
             Feb: "Feb",
             Mar: "Mar",
@@ -41,14 +42,20 @@ i18n
             Fri: "Fri",
             Sat: "Sat",
             Sun: "Sun",
-            moneyGained: "money gained",
-            viewTimes: "times viewed",
+            moneyGained: "Money Gained",
+            viewTimes: "Times Viewed",
             current: "current",
-            previous: "previous"
+            previous: "previous",
+            day: "day",
+            week: "week",
+            year: "year"
         }
       },
       pl: {
         translation: {
+            day: "dzień",
+            week: "tydzień",
+            year: "rok",
             salesChart: "Wykres Sprzedaży",
             offerRanking: "Ranking Ofert",
             customerFeedback: "Opinia Klientów",
@@ -61,8 +68,8 @@ i18n
             negativeOpinion: "negatywne",
             allOpinions: "wszystkie",
             ago: "dni temu",
-            piecesTitle: "ile sprzedane",
-            offer: "przedmiot",
+            piecesTitle: "sprzedane",
+            offer: "Oferta",
             Jan: "Sty",
             Feb: "Lut",
             Mar: "Mar",
@@ -75,7 +82,8 @@ i18n
             Oct: "Paź",
             Nov: "Lis",
             Dec: "Gru",
-          
+            best: "najlepsze",
+            worst: "najgorsze",
             Mon: "Pon",
             Tue: "Wt",
             Wed: "Śr",
@@ -83,10 +91,11 @@ i18n
             Fri: "Pt",
             Sat: "Sob",
             Sun: "Ndz",
-            viewTimes: "wyświetleń",
-            moneyGained: "obrót",
+            viewTimes: "Widziano",
+            moneyGained: "Zarobiono",
             current: "obecny",
-            previous: "poprzedni"
+            previous: "poprzedni",
+            rank: "Numer"
         }
       }
     },

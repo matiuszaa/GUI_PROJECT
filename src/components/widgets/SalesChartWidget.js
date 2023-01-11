@@ -3,50 +3,17 @@ import { BarChart, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar,
 import {
     Paper,
     ToggleButtonGroup,
-    Typography,
     Avatar,
   } from "@mui/material";
 import { ToggleButton } from '@material-ui/lab';
-import { Select, MenuItem } from "@mui/material";
+import { CustomMenuItem, CustomSelect } from '../common/commoncomp';
 import { Translation } from "react-i18next";
+import { Typography } from '@mui/material';
 import "./widgets.css"
 import "./SalesChartWidget.css"
 import { styled } from "@mui/material/styles";
 import barChartPicture from "./../../data/photos/barChart.webp"
 import linearChartPicture from "./../../data/photos/linearChart.png"
-
- const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
-    color: "#009933",
-    fontSize: 13,
-    fontWeight: 800,
-    fontFamily: "Montserrat"
-  }));
-  
-   const CustomSelect = styled(Select)(({ theme }) => ({
-    backgroundColor: "#FFFDD0",
-    color: "#009933",
-    fontSize: 13,
-    fontFamily: "Montserrat",
-    fontWeight: 800,
-    height: 30,
-    width: 100,
-    "& .MuiSelect-icon": {
-      color: "#009933"
-    },
-    "&.Mui-selected": {
-        backgroundColor: "red",
-      },
-    "&& fieldset": {
-      border: "1px solid #FDAA4A"
-    },
-    "&:hover": {
-      "&& fieldset": {
-        border: "1px solid #F47933"
-      }
-    }
-  }));
-
-
 
 const CustomToggleButton = styled(ToggleButton)(props => ({
     border: "1px solid #FDAA4A",
@@ -79,7 +46,6 @@ export class SalesChartWidget extends React.Component {
     };
   }
   
-
   toggleChartType = () => {
     this.setState((state) => ({
       chartType: state.chartType === 'bar' ? 'line' : 'bar',
@@ -126,14 +92,16 @@ export class SalesChartWidget extends React.Component {
                 }}>        
         <div className='WidgetsPadding'>
             <div className='salesChartWidgetHeader'>
-                <a>{ln("salesChart")}</a>
-                <div>
-            <CustomSelect className='button-spacing'>
+                <Typography variant="widgetHeader">
+                    {ln("salesChart")}
+                </Typography>
+            <div>
+            <CustomSelect defaultValue={10}>
                 <CustomMenuItem value={10}>
-                {ln('amount')}
+                    {ln('amount')}
                 </CustomMenuItem>
                 <CustomMenuItem value={20}>
-                {ln('turnover')}
+                    {ln('turnover')}
                 </CustomMenuItem>
             </CustomSelect>
             </div>
@@ -142,9 +110,9 @@ export class SalesChartWidget extends React.Component {
         <div className="buttonsWidget">
             <div>
             <CustomToggleButtonGroup>
-                <CustomToggleButton selected={dataType ==="hours"} color="#FDAA4A" onClick={() => this.toggleDataType('hours')}>Day</CustomToggleButton>
-                <CustomToggleButton selected={dataType ==="days"} color = "#FDAA4A" onClick={() => this.toggleDataType('days')}>Week</CustomToggleButton>
-                <CustomToggleButton selected={dataType ==="months"} color = "#FDAA4A" onClick={() => this.toggleDataType('months')}>Year</CustomToggleButton>
+                <CustomToggleButton selected={dataType ==="hours"} color="#FDAA4A" onClick={() => this.toggleDataType('hours')}><Typography variant="buttonsAndSelectLabel">{ln("day")}</Typography></CustomToggleButton>
+                <CustomToggleButton selected={dataType ==="days"} color = "#FDAA4A" onClick={() => this.toggleDataType('days')}><Typography variant="buttonsAndSelectLabel">{ln("week")}</Typography></CustomToggleButton>
+                <CustomToggleButton selected={dataType ==="months"} color = "#FDAA4A" onClick={() => this.toggleDataType('months')}><Typography variant="buttonsAndSelectLabel">{ln("year")}</Typography></CustomToggleButton>
                 </CustomToggleButtonGroup>
             </div>
             <div className='salesChartWidgetChartButtons'>
@@ -164,8 +132,12 @@ export class SalesChartWidget extends React.Component {
                     }}
                     disabled={false}
                 >
-                <CustomToggleButton selected={this.state.currentPeriod} color= '#8884d8' style={{marginRight: 20}} type="button" onClick={() => this.toggleCurrentPeriod()}>{ln("current")}</CustomToggleButton>
-                <CustomToggleButton selected={this.state.previousPeriod} color= '#32CD32' type="button" onClick={() => this.togglePreviousPeriod()}>{ln("previous")}</CustomToggleButton>
+                <CustomToggleButton selected={this.state.currentPeriod} color= '#8884d8' style={{marginRight: 20}} type="button" onClick={() => this.toggleCurrentPeriod()}>
+                <Typography variant = "buttonsAndSelectLabel">{ln("current")}</Typography>
+                </CustomToggleButton>
+                <CustomToggleButton selected={this.state.previousPeriod} color= '#32CD32' type="button" onClick={() => this.togglePreviousPeriod()}>
+                <Typography variant = "buttonsAndSelectLabel">{ln("previous")}</Typography>
+                </CustomToggleButton>
             </CustomToggleButtonGroup>
             </div>
             </div>

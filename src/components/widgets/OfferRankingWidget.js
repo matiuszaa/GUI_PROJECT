@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createTheme, styled } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,40 +9,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import { CustomMenuItem, CustomSelect } from '../common/commoncomp';
+import { Typography } from '@mui/material';
 import { Translation } from 'react-i18next'
-import { Select, MenuItem } from "@mui/material";
-
-
-const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
-    color: "#009933",
-    fontSize: 13,
-    fontWeight: 800,
-    fontFamily: "Montserrat"
-  }));
-  
-const CustomSelect = styled(Select)(({ theme }) => ({
-    backgroundColor: "#FFE4B5",
-    color: "#009933",
-    fontSize: 13,
-    fontFamily: "Montserrat",
-    fontWeight: 800,
-    height: 30,
-    width: 120,
-    "& .MuiSelect-icon": {
-      color: "#009933"
-    },
-    "&& fieldset": {
-      border: "1px solid #FDAA4A"
-    },
-    "&:hover": {
-      "&& fieldset": {
-        border: "1px solid #F47933"
-      }
-    }
-  }));
-  
-
+import "./widgets.css"
+import "./OfferRankingWidget.css"
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -99,25 +70,28 @@ render(){
 <div
 className="WidgetsPadding"
 style={{
-display: "flex",
-flexDirection: "column",
-justifyContent: "flex-start"
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start"
 }}
 >
-    <div style={{    display: 'flex',
-    alignItems: 'center',
+    <div style={{display:'flex',
     justifyContent: 'space-between'}}>
-    <Typography className={useStyles.h2}>
-        {ln("offerRanking")}
-    </Typography>
-    <CustomSelect onChange={this.changeHandler}>
-            <CustomMenuItem value={"najlepsze"}>
-            najlepsze
+    <div>
+        <Typography variant="widgetHeader">
+            {ln("offerRanking")}
+        </Typography>
+    </div>
+    <div>
+    <CustomSelect defaultValue="najlepsze" onChange={this.changeHandler}>
+            <CustomMenuItem value="najlepsze">
+                {ln("best")}
             </CustomMenuItem>
             <CustomMenuItem value={"najgorsze"}>
-            najgorsze
+                {ln("worst")}
             </CustomMenuItem>
-        </CustomSelect>
+    </CustomSelect>
+    </div>
     </div>
     <TableContainer>
       <Table className={useStyles.table} aria-label="custom table"
@@ -128,23 +102,23 @@ justifyContent: "flex-start"
           }}>
         <TableHead>
           <TableRow className={useStyles.row} sx={{ "& td": { border: 0 } }}>
-            <TableCell>{ln("rank")}</TableCell>
-            <TableCell>{ln("offer")}</TableCell>
-            <TableCell align="right">{ln("piecesTitle")}</TableCell>
-            <TableCell align="right">{this.state.selectedValue === "najlepsze" ? ln("moneyGained") : ln("viewTimes")}</TableCell>
+            <TableCell><Typography variant="tableAndNameHeaders">{ln("rank")}</Typography></TableCell>
+            <TableCell><Typography variant="tableAndNameHeaders">{ln("offer")}</Typography></TableCell>
+            <TableCell><Typography variant="tableAndNameHeaders">{ln("piecesTitle")}</Typography></TableCell>
+            <TableCell><Typography variant="tableAndNameHeaders">{this.state.selectedValue === "najlepsze" ? ln("moneyGained") : ln("viewTimes")}</Typography></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {this.state.offerData.map((offer, index) => (
             <TableRow key={offer.id}>
               <TableCell component="th" scope="row">
-                {index + 1}
+              <Typography variant="tableContent"> {index + 1} </Typography>
               </TableCell>
               <TableCell>
-                <Avatar src={offer.image} alt={offer.name} /> {offer.name}
+                <Avatar src={offer.image} alt={offer.name} /> <Typography variant="tableContent">{offer.name}</Typography>
               </TableCell>
-              <TableCell align="right">{offer.piecesSold}</TableCell>
-              <TableCell align="right">{this.state.selectedValue === "najlepsze" ? offer.moneyGained : offer.viewTimes} zl</TableCell>
+              <TableCell><Typography variant="tableContent">{offer.piecesSold}</Typography></TableCell>
+              <TableCell><Typography variant="tableContent"> {this.state.selectedValue === "najlepsze" ? offer.moneyGained : offer.viewTimes}</Typography></TableCell>
             </TableRow>
           ))}
         </TableBody>

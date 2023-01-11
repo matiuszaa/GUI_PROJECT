@@ -1,4 +1,3 @@
-
 export const feedbackData = {
     best: [
     {
@@ -22,7 +21,7 @@ export const feedbackData = {
         {
         rating: 4.5,
         text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-        author: 'Robert Johnson',
+        author: 'Robert Johnso',
         date: new Date('2021-12-17')
       },
     ],
@@ -42,19 +41,19 @@ export const feedbackData = {
         {
           rating: 1,
           text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-          author: 'Robert Johnson',
+          author: 'Robert Johnsnon',
           date: new Date('2022-02-17')
         },
             {
             rating: 0.5,
             text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-            author: 'Robert Johnson',
+            author: 'Robert Johnjson',
             date: new Date('2021-12-17')
           },
           {
             rating: 0.5,
             text: 'I am very happy with my purchase. Extraordinary Extraordinary Extraordinary Extraordinary Extraoardinary',
-            author: 'Robert Johnson',
+            author: 'Robert Jtfohnson',
             date: new Date('2021-11-17')
           },
         ],

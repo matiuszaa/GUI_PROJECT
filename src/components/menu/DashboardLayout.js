@@ -16,12 +16,13 @@ export class DashboardLayout extends React.Component {
     <Translation>
         {(ln) => (
           <div className="DashboardLayout">
+
             <OfferRankingWidget data={this.props.offerData}/>
-            <CustomerFeedbackWidget data={this.props.feedbackData}/>
 
             <div id="right_column_container">
             </div>
-             <SalesChartWidget data={this.props.salesChartData}/>
+            <CustomerFeedbackWidget data={this.props.feedbackData}/>
+            <SalesChartWidget data={this.props.salesChartData}/>
             </div>
         )}
     </Translation>
