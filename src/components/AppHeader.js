@@ -7,6 +7,21 @@ import {
     Avatar, Typography
   } from "@mui/material";
 import { Translation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
+const Logout = ({setLogin, ln}) => {
+    const navigate = useNavigate();
+    
+    const logout = () => {
+        setLogin('');
+        localStorage.clear();
+        navigate('/login');
+    }
+
+    return (
+        <div className="logout" onClick={logout}>{ln('logout')}</div>
+    )
+}
 
 export class AppHeader extends React.Component {
     constructor(props) {
@@ -37,8 +52,8 @@ export class AppHeader extends React.Component {
                     id="avatar" 
                     src={this.state.langImage === enPicture ? plPicture : enPicture}  
                     onClick={this.handleLanguageChange}
-                    // style={{ borderRadius: 0}}
                 />
+                <Logout setLogin={this.props.setLogin} ln={ln} />
             </div>
         )}
         </Translation>

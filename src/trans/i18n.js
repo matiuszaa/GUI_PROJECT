@@ -81,7 +81,9 @@ i18n
             adviceNext: "Another",
             advice1: "It\'s not the best advice",
             advice2: "It\'s the best advice",
-            advice3: "Lorem ipsum"
+            advice3: "Lorem ipsum",
+            
+            logout: 'Logout',
         }
       },
       pl: {
@@ -161,7 +163,9 @@ i18n
             adviceNext: "Następna",
             advice1: "To nie jest najlepsza porada",
             advice2: "To jest najlepsza porada",
-            advice3: "Lorem ipsum"
+            advice3: "Lorem ipsum",
+
+            logout: 'Wyloguj',
         }
       }
     },
