@@ -1,3 +1,4 @@
+import headphones from "./photos/sluchawki.png"
 export const feedbackData = {
     best: [
     {
@@ -105,7 +106,7 @@ export const offerRankingData = {
         {
           id: 1,
           name: 'Offer 1',
-          image: '/path/to/image1.jpg',
+          image: headphones,
           piecesSold: 100,
           moneyGained: 1000,
         },

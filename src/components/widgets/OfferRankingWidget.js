@@ -115,7 +115,7 @@ style={{
               <Typography variant="tableContent"> {index + 1} </Typography>
               </TableCell>
               <TableCell>
-                <Avatar src={offer.image} alt={offer.name} /> <Typography variant="tableContent">{offer.name}</Typography>
+                <Avatar style={{ border: 'solid 2px black' }} src={offer.image} alt={offer.name} /> <Typography variant="tableContent">{offer.name}</Typography>
               </TableCell>
               <TableCell><Typography variant="tableContent">{offer.piecesSold}</Typography></TableCell>
               <TableCell><Typography variant="tableContent"> {this.state.selectedValue === "najlepsze" ? offer.moneyGained : offer.viewTimes}</Typography></TableCell>

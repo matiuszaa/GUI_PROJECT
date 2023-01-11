@@ -2,6 +2,7 @@ import "./AppHeader.css"
 import i18n from './../trans/i18n';
 import plPicture from "./../data/photos/polska.png"
 import enPicture from "./../data/photos/british.png"
+import light from "./../data/photos/sun.jpg"
 import React from "react";
 import {
     Avatar, Typography
@@ -47,10 +48,11 @@ export class AppHeader extends React.Component {
                     Dashboard
                 </Typography>
                 <div className="theme">
+                    <Avatar src={light}/>
                 </div>
                 <Avatar 
                     id="avatar" 
-                    src={this.state.langImage === enPicture ? plPicture : enPicture}  
+                    src={this.state.langImage === enPicture ? enPicture : plPicture}  
                     onClick={this.handleLanguageChange}
                 />
                 <Logout setLogin={this.props.setLogin} ln={ln} />

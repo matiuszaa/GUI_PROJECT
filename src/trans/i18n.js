@@ -76,7 +76,7 @@ i18n
             qualityItsOk: 'It\'s ok',
             qualityNotBad: 'Not bad',
             qualityVeryGood: 'Fantastic',
-
+            all: "all",
             adviceTitle: "Some advice",
             adviceNext: "Another",
             advice1: "It\'s not the best advice",
@@ -103,6 +103,7 @@ i18n
             negativeOpinion: "negatywne",
             allOpinions: "wszystkie",
             ago: "dni temu",
+            all: "wszystkie",
             piecesTitle: "sprzedane",
             offer: "Oferta",
             Jan: "Sty",

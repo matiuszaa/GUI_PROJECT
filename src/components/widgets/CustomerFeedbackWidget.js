@@ -54,6 +54,7 @@ export class CustomerFeedbackWidget extends React.Component{
               <div>
                 <CustomSelect defaultValue="pozytywne" onChange={this.changeHandler}>
                     <CustomMenuItem value="pozytywne">{ln("positiveOpinion")}</CustomMenuItem>
+                    <CustomMenuItem value="wszystkie">{ln("all")}</CustomMenuItem>
                     <CustomMenuItem value="negatywne">{ln("negativeOpinion")}</CustomMenuItem>
                 </CustomSelect>
             </div>
