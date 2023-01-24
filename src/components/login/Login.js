@@ -15,11 +15,14 @@ const Login = ({login, setLogin, authorize}) => {
   }
 
   return (
+    <div className="loginPage">
+    { <AppHeader></AppHeader> }
+
     <div className="login">
-      {/* <AppHeader></AppHeader> */}
       <h1>Zaloguj się</h1>
       <Input value={login} onChange={e => setLogin(e.target.value)} defaultValue="Hello world" inputProps={ariaLabel} />
       <Button onClick={start} variant="contained">Contained</Button>
+    </div>
     </div>
   )
 }

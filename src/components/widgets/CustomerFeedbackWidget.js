@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Rating from '@material-ui/lab/Rating';
+import { Link } from 'react-router-dom';
 import {
     Paper
   } from "@mui/material";
@@ -45,11 +46,10 @@ export class CustomerFeedbackWidget extends React.Component{
             >
             <div className="customerFeedbackHeader">
               <div>
-                <Typography
-                    variant="widgetHeader"
-                >
-                    {ln("customerFeedback")}
-                </Typography>
+
+                <Link to="/feedback" style={{ textDecoration: 'none' }}><Typography
+                    variant="widgetHeader">
+                        {ln("customerFeedback")}</Typography></Link>
               </div>
               <div>
                 <CustomSelect defaultValue="pozytywne" onChange={this.changeHandler}>

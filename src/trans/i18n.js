@@ -7,6 +7,7 @@ i18n
     resources: {
       en: {
         translation: {
+            back: "back to main page",
             salesChart: "Sales Chart",
             offerRanking: "Offer Ranking",
             customerFeedback: "Customer Feedback",
@@ -49,7 +50,8 @@ i18n
             day: "day",
             week: "week",
             year: "year",
-            
+            currentPeriod: "currentPeriod",
+            previousPeriod: "previousPeriod",
             unPaid: "not paid",
             notSend: "not send",
             returned: 'returned',
@@ -88,6 +90,9 @@ i18n
       },
       pl: {
         translation: {
+            back: "powrót do strony głównej",
+            currentPeriod: "obecny okres",
+            previousPeriod: "poprzedni okres",
             day: "dzień",
             week: "tydzień",
             year: "rok",

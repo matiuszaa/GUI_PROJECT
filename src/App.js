@@ -6,11 +6,10 @@ import { ThemeProvider } from '@emotion/react';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Login from './components/login/Login'
-import { PermCameraMic } from '@mui/icons-material';
-
+import CustomerFeedbackPage from './components/page/CustomerFeedbackPage';
 function App() {
   const [login, setLogin] = useState('');
-
+  const [accountName, setAccountName] = useState('firstAccount')
   useEffect(() => {
     let log = localStorage.getItem('login');
     if( log ){
@@ -19,16 +18,20 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme = {theme}>
+
+    <BrowserRouter>
+        <ThemeProvider theme = {theme}>
         <div className="App">
-            <BrowserRouter>
-              <Routes>
-                <Route path='/login' element={<Login login={login} setLogin={setLogin} />} />
-                <Route path='/' element={<Dashboard login={login} setLogin={setLogin} />} />
-              </Routes>
-            </BrowserRouter>  
-        </div>
-    </ThemeProvider>
+            <AppHeader></AppHeader>
+                <Routes>
+                    <Route path='/login' element={<Login login={login} setLogin={setLogin} />} />
+                    <Route path='/' element={<Dashboard accountName={accountName} setter={setAccountName} login={login} setLogin={setLogin} />} />
+                    <Route path="/feedback" element={<CustomerFeedbackPage/>} />
+                </Routes>
+            </div>
+        </ThemeProvider>
+    </BrowserRouter>  
+
   );
 }
 

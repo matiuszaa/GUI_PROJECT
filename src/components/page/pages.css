@@ -1,0 +1,10 @@
+.PageSize {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.Span {
+    position: absolute;
+    top: 95%;
+  }

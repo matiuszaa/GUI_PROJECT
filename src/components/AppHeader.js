@@ -8,7 +8,7 @@ import {
     Avatar, Typography
   } from "@mui/material";
 import { Translation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Logout = ({setLogin, ln}) => {
     const navigate = useNavigate();
@@ -44,9 +44,11 @@ export class AppHeader extends React.Component {
         <Translation>
             {(ln) => (
             <div className="AppHeader">
-                <Typography className="title" variant="titleHeader">
-                    Dashboard
-                </Typography>
+                <Link to="/" className="title" style={{ textDecoration: 'none', color: 'black' }}>
+                    <Typography variant="titleHeader">
+                        Dashboard
+                    </Typography>
+                </Link>
                 <div className="theme">
                     <Avatar src={light}/>
                 </div>

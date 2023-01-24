@@ -64,6 +64,7 @@ export const theme = createTheme({
             fontFamily: "Verdana",
         },
         widgetHeader: {
+            underline: 'none',
             fontWeight: 800,
             fontSize: "1.45em",
             fontFamily: "Verdana",

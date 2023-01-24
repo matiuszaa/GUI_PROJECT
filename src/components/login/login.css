@@ -4,6 +4,10 @@
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
 }
+.loginPage {
+    width: 1000px;
+    background-color: #FFFDD0;
+}
 
 .login > * {
   display: block;
@@ -13,6 +17,7 @@
   padding: 15px;
   margin: 15px;
 }
+
 
 .login button {
   display: block;
