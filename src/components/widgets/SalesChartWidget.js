@@ -150,6 +150,7 @@ export class SalesChartWidget extends React.Component {
                     </CustomToggleButtonGroup>
                     </div>
                 </div>
+                
             </div>
             {chartType === 'bar' ? (
             <BarChart width={800} height={300} data={dataToUse}>
@@ -159,7 +160,7 @@ export class SalesChartWidget extends React.Component {
                 <Tooltip />
                 <Legend />
                 {this.state.currentPeriod ? <Bar dataKey={this.state.selectedValue === "amount" ? "currentAmount" : "piecesSold"} name={ln("currentPeriod")} fill="#8884d8" tooltip={{label: ln("currentPeriod")}}/> : ""}
-                {this.state.previousPeriod ? <Bar dataKey="piecesSold2" name={ln("previousPeriod")} tooltip={{label: ln("previousPeriod")}} fill="#32CD32"  /> : ""}
+                {this.state.previousPeriod ? <Bar dataKey={this.state.selectedValue === "amount" ? "previousAmount" : "previousPiecesSold"} name={ln("previousPeriod")} tooltip={{label: ln("previousPeriod")}} fill="#32CD32"  /> : ""}
             </BarChart>
             ) : (
             <LineChart width={800} height={300} data={dataToUse}>
@@ -168,8 +169,8 @@ export class SalesChartWidget extends React.Component {
                 <CartesianGrid stroke="#ccc" strokeDasharray="4 4" />
                 <Tooltip />
                 <Legend />
-                {this.state.currentPeriod ? <Line type="monotone" dataKey="piecesSold" strokeWidth={3} name={ln("currentPeriod")} stroke="#8884d8" tooltip={{label: ln("currentPeriod")}} /> : ""}
-                {this.state.previousPeriod ? <Line type="monotone" dataKey="piecesSold2" strokeWidth={3} name={ln("previousPeriod")} stroke="#32CD32" tooltip={{label: ln("previousPeriod")}} /> : ""}
+                {this.state.currentPeriod ? <Line type="monotone" dataKey={this.state.selectedValue === "amount" ? "currentAmount" : "piecesSold"} strokeWidth={3} name={ln("currentPeriod")} stroke="#8884d8" tooltip={{label: ln("currentPeriod")}} /> : ""}
+                {this.state.previousPeriod ? <Line type="monotone" dataKey={this.state.selectedValue === "amount" ? "previousAmount" : "previousPiecesSold"} strokeWidth={3} name={ln("previousPeriod")} stroke="#32CD32" tooltip={{label: ln("previousPeriod")}} /> : ""}
             </LineChart>
             )}
             </div>

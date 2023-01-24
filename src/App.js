@@ -25,7 +25,7 @@ function App() {
             <AppHeader></AppHeader>
                 <Routes>
                     <Route path='/login' element={<Login login={login} setLogin={setLogin} />} />
-                    <Route path='/' element={<Dashboard accountName={accountName} setter={setAccountName} login={login} setLogin={setLogin} />} />
+                    <Route path='/' element={<Dashboard accountName={accountName} login={login} setLogin={setLogin} />} />
                     <Route path="/feedback" element={<CustomerFeedbackPage/>} />
                 </Routes>
             </div>

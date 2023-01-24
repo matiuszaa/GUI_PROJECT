@@ -47,7 +47,6 @@ export class OfferRankingWidget extends React.Component{
         };
         this.changeHandler = this.changeHandler.bind(this);
       }
-
   changeHandler = (event) => {
     event.target.value === "najlepsze" ? this.setState
     ({selectedValue: "najlepsze", offerData : this.props.data.bestOffers}) : 

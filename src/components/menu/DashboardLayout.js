@@ -8,12 +8,12 @@ import { Translation } from "react-i18next";
 import { OrderWidget } from "../widgets/OrderWidget/OrderWidget";
 import {SalesQualityWidget } from '../widgets/SalesQualityWidget/SalesQualityWidget'
 import {SalesAdviceWidget} from '../widgets/SalesAdviceWidget';
-import { Grid } from "@mui/material";
 
 export class DashboardLayout extends React.Component {
   constructor(props) {
     super(props);
   }
+
 
   render() {
     return (
