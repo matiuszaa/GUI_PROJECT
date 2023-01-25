@@ -1,66 +1,47 @@
-import "./AppHeader.css"
-import i18n from './../trans/i18n';
-import plPicture from "./../data/photos/polska.png"
-import enPicture from "./../data/photos/british.png"
-import light from "./../data/photos/sun.jpg"
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import {
     Avatar, Typography
-  } from "@mui/material";
-import { Translation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+} from "@mui/material";
 
-const Logout = ({setLogin, ln}) => {
-    const navigate = useNavigate();
-    
-    const logout = () => {
-        setLogin('');
-        localStorage.clear();
-        navigate('/login');
+import light from "./../data/photos/sun.jpg"
+import plPicture from "./../data/photos/polska.png"
+import enPicture from "./../data/photos/british.png"
+
+import { useTranslation } from "react-i18next";
+
+import "./AppHeader.css"
+
+import Logout from "./auth/Logout";
+
+
+export const AppHeader = ({login, setLogin}) => {
+    const [langImage, setLangImage] = useState(enPicture);
+    const [ln, i18n] = useTranslation();
+
+    const handleLanguageChange = () => {
+        i18n.changeLanguage(langImage === plPicture ? "en" : "pl");
+        setLangImage(langImage === enPicture ? plPicture : enPicture);
     }
-
-    return (
-        <div className="logout" onClick={logout}>{ln('logout')}</div>
+    
+    return(
+        <div className="AppHeader">
+            <Link to="/" className="title" style={{ textDecoration: 'none', color: 'black' }}>
+                <Typography variant="titleHeader">
+                    Dashboard
+                </Typography>
+            </Link>
+            <div className="theme">
+                <Avatar src={light}/>
+            </div>
+            <Avatar 
+                id="avatar" 
+                src={langImage === enPicture ? enPicture : plPicture}  
+                onClick={handleLanguageChange}
+            />
+            <Logout setLogin={setLogin} ln={ln} />
+        </div>
     )
 }
-
-export class AppHeader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          langImage: enPicture,
-        };
-      }
-
-    handleLanguageChange = () => {
-        i18n.changeLanguage(this.state.langImage === plPicture ? "en" : "pl")
-        this.setState({
-            langImage: this.state.langImage === enPicture ? plPicture : enPicture
-        })
-    }
-    
-    render() {
-        return(
-        <Translation>
-            {(ln) => (
-            <div className="AppHeader">
-                <Link to="/" className="title" style={{ textDecoration: 'none', color: 'black' }}>
-                    <Typography variant="titleHeader">
-                        Dashboard
-                    </Typography>
-                </Link>
-                <div className="theme">
-                    <Avatar src={light}/>
-                </div>
-                <Avatar 
-                    id="avatar" 
-                    src={this.state.langImage === enPicture ? enPicture : plPicture}  
-                    onClick={this.handleLanguageChange}
-                />
-                <Logout setLogin={this.props.setLogin} ln={ln} />
-            </div>
-        )}
-        </Translation>
-        )
-    }
-}
+export default AppHeader;

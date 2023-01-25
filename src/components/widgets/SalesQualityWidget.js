@@ -1,15 +1,18 @@
-import React, {useState} from "react";
-import "../widgets.css";
-import "./SalesQualityWidget.css"
+import React, {useState, useEffect} from "react";
+
+import { Box, Card, CardContent, Tab } from "@material-ui/core";
+import { TabContext, TabList, TabPanel } from "@material-ui/lab";
+
 import {
   Paper, Typography,
 } from "@mui/material";
-import { Box, Card, CardContent, Tab } from "@material-ui/core";
-import { useEffect } from "react";
-import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
 import {styled} from '@mui/material/styles'
-import { Translation } from "react-i18next";
+
+import { useTranslation } from "react-i18next";
+
+import "./css/widgets.css";
+import "./css/SalesQualityWidget.css"
 
 const ocean = [
   {
@@ -68,7 +71,7 @@ function LinearProgressWithLabel(props) {
 
 const QualityPanel = ({value, o, ln}) => {
   return (
-    <TabPanel className="tabpanel" value={value}>
+    <TabPanel className="tabpanel" value={'' + value}>
       <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
         {ln('qualityElemMax')}: {o.size}
       </Typography>
@@ -93,9 +96,10 @@ const QualityPanel = ({value, o, ln}) => {
   )
 }
 
-export const SalesQualityWidget = () => {
+const SalesQualityWidget = () => {
   let [suma, setSuma] = useState(0);
   let [suma1, setSuma1] = useState(0);
+  const [ln, i18n] = useTranslation();
 
   useEffect(() => {
     suma = 0;
@@ -121,8 +125,6 @@ export const SalesQualityWidget = () => {
     (suma / suma1 * 100) <= 100 ? ln('qualityVeryGood') : null}</strong>)
 
   return (
-    <Translation>
-    {(ln) => (
     <div className="SalesQualityWidget">
       <Paper
         sx={{
@@ -142,18 +144,18 @@ export const SalesQualityWidget = () => {
         </div>
 
         <Box sx={{ width: '100%', typography: 'body1' }}>
-          <TabContext value={value}>
+          <TabContext value={'' + value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList className="tablist" onChange={handleChange} aria-label="lab API tabs example">
-                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySummarise')}</Typography>} value={0} />
-                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySales')}</Typography>} value={1} />
-                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityClients')}</Typography>} value={2} />
-                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityReturn')}</Typography>} value={3} />
-                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityService')}</Typography>} value={4} />
-                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityPrices')}</Typography>} value={5} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySummarise')}</Typography>} value={'0'} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySales')}</Typography>} value={'1'} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityClients')}</Typography>} value={'2'} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityReturn')}</Typography>} value={'3'} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityService')}</Typography>} value={'4'} />
+                <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualityPrices')}</Typography>} value={'5'} />
               </TabList>
             </Box>
-              <TabPanel className="tabpanel" value={0}>
+              <TabPanel className="tabpanel" value={'0'}>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
                   {ln('qualityMaxMark')}: {suma1}
                 </Typography>
@@ -170,8 +172,8 @@ export const SalesQualityWidget = () => {
                     <ul>
                       {[...ocean].sort((a, b) => 
                         a.current / a.size > b.current / b.size ? 1 : -1
-                      ).filter(a => a.size !== 0).slice(0,3).map(a => 
-                        <li>{ln(a.name)}</li>
+                      ).filter(a => a.size !== 0).slice(0,3).map((a, key) => 
+                        <li key={key}>{ln(a.name)}</li>
                       )}
                     </ul>
                   </Typography>
@@ -179,37 +181,12 @@ export const SalesQualityWidget = () => {
 
               </TabPanel>
               {ocean.map((o, idx) => 
-                <QualityPanel value={idx + 1} o={o} ln={ln} />
+                <QualityPanel key={idx} value={idx + 1} o={o} ln={ln} />
               )}
           </TabContext>
         </Box>
-
-
-        {/* <div className="quality"><Typography variant="tableAndNameHeaders">Ocena jakości</Typography></div>
-        <div>
-        <Typography variant="tableContent">{result}</Typography>
-        </div>
-        <div className="result">
-          <div>
-            <span><Typography variant="tableContent">Wynik jakości: </Typography></span>
-            <strong><Typography variant="tableAndNameHeaders">{(suma / suma1 * 100).toFixed(2)} %</Typography></strong>
-          </div>
-          <div>
-            <span><Typography variant="tableContent">Kategoria jakości: </Typography></span>
-            <Typography variant="tableAndNameHeaders">{wynik}</Typography>
-          </div>
-          <div>
-            <span><Typography variant="tableContent">Popraw się w: </Typography></span>
-            <ul>
-              {
-                list.map(o => <li><strong><Typography variant="tableAndNameHeaders">{o.name}</Typography></strong></li>)
-              }
-            </ul>
-          </div>
-        </div> */}
       </Paper>
     </div>
-    )}
-    </Translation>
-    )
+  )
 }
+export default SalesQualityWidget;

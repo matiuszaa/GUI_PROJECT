@@ -1,67 +1,54 @@
-import React from "react";
-import { DashboardLayout } from "./DashboardLayout";
-import { Translation } from "react-i18next";
+import React, { useState } from "react";
+import DashboardLayout from "./DashboardLayout";
 import { accountNames, FirstAccountData,EmptyAccountData, DataMock} from "../../data/user";
 import { AppBar, Tab, Tabs, Typography } from "@mui/material";
 
-export class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.dataRequester = new DataMock();
+const Dashboard = ({accountName, login, setLogin}) => {
+  const dataRequester = new DataMock();
+  const [state, setState] = useState({
+    accountNames: "FIRST",
+    salesChartData: FirstAccountData['salesChartData'],
+    feedbackData: FirstAccountData['feedbackData'],
+    offerRankingData: FirstAccountData['offerRankingData']
+  })
 
-    this.state = {  
-        accountName: "FIRST",
-        salesChartData: FirstAccountData['salesChartData'],
-        feedbackData: FirstAccountData['feedbackData'],
-        offerRankingData: FirstAccountData['offerRankingData']
-      };
-      
-  }
-
-  handleChildValueChange = (e) => {
-    console.log(e.target.innerText)
-    let Data=this.dataRequester.getOfferRankingData(e.target.innerText)
-    this.setState( (state) => ({
+  const handleChildValueChange = (e) => {
+    let data = dataRequester.getOfferRankingData(e.target.innerText)
+    setState({ ...state,
         accountName: e.target.innerText,
-        salesChartData: Data['salesChartData'],
-        feedbackData: Data['feedbackData'],
-        offerRankingData: Data['offerRankingData']
-    }));
+        salesChartData: data['salesChartData'],
+        feedbackData: data['feedbackData'],
+        offerRankingData: data['offerRankingData']
+    });
   };
 
-  render() {
-    return (     
-          <Translation>
-              {(ln) => (
-                <div>
-                <div>
-                    <div className='CustomRoot' />
-                        <AppBar position="static">
-                            <Tabs
-                                className='CustomSelectedTab'
-                            >
-                                {accountNames.map((account) => (
-                                    <Tab
-                                    key={account}
-                                    value={account}
-                                    label={<Typography variant="account">{account}</Typography>}
-                                    onClick={this.handleChildValueChange}
-                                    />
-                                ))}
-                            </Tabs>
-                        </AppBar>
-                    </div>
-                <div className="Dashboard">
-                  <DashboardLayout className="DashboardLayout" 
-                      salesChartData={this.state.salesChartData}
-                      feedbackData={this.state.feedbackData}
-                      offerData={this.state.offerRankingData}
-                  />
-                </div>
-            </div>
+  return (     
+    <div>
+      <div>
+        <div className='CustomRoot'></div>
+          <AppBar position="static">
+            <Tabs
+              className='CustomSelectedTab'
+              >{accountNames.map((account) => (
+                <Tab
+                  key={account}
+                  value={account}
+                  label={<Typography variant="account">{account}</Typography>}
+                  onClick={handleChildValueChange}
+                />
+              ))}
+            </Tabs>
+          </AppBar>
+        </div>
+      <div className="Dashboard">
+        <DashboardLayout className="DashboardLayout" 
+            salesChartData={state.salesChartData}
+            feedbackData={state.feedbackData}
+            offerData={state.offerRankingData}
+        />
+      </div>
+    </div>
+  )
+}
 
-              )}
-          </Translation>
-    )}
-
-  }
+export default Dashboard;

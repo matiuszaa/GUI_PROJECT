@@ -1,5 +1,4 @@
-import React from "react";
-import "./widgets.css";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -7,20 +6,20 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { Translation } from "react-i18next";
 
-const P = () => {
+import { useTranslation } from "react-i18next";
 
-}
+import "./css/widgets.css";
 
-export const SalesAdviceWidget = () => {
+
+const SalesAdviceWidget = () => {
   const [list, setList] = useState([
     'advice1',
     'advice2',
     'advice3'
   ]);
   const [ran, setRan] = useState(0);
+  const [ln, i18n] = useTranslation();
 
   const random = () => {
     let t = Math.floor(Math.random() * list.length);
@@ -31,8 +30,6 @@ export const SalesAdviceWidget = () => {
   }
 
   return (
-    <Translation>
-    {(ln) => (
     <div className="SalesAdviceWidget">
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
@@ -41,7 +38,7 @@ export const SalesAdviceWidget = () => {
           </Typography>
 
           <Typography sx={{ fontSize: 12, textAlign:'left' }} color="text.secondary" gutterBottom>
-            <p>{ln(list[ran])}</p>
+            {ln(list[ran])}
           </Typography>
         </CardContent>
         <CardActions>
@@ -49,7 +46,7 @@ export const SalesAdviceWidget = () => {
         </CardActions>
       </Card>
     </div>
-    )}
-    </Translation>
   )
 }
+
+export default SalesAdviceWidget;
