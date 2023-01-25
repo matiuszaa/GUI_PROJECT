@@ -40,7 +40,7 @@ export const AppHeader = ({login, setLogin}) => {
                 src={langImage === enPicture ? enPicture : plPicture}  
                 onClick={handleLanguageChange}
             />
-            <Logout setLogin={setLogin} ln={ln} />
+            <Logout />
         </div>
     )
 }

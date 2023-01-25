@@ -9,6 +9,11 @@
   .customerFeedbackHeader {
     display: flex;
     justify-content: space-between;
+    padding: 15px;
+  }
+
+  .customerWidgetPadding {
+    padding: 15px;
   }
   
   .CustomerFeedback {
@@ -22,7 +27,7 @@
     text-align: left;
     justify-content: space-around;
     width: 100%;
-  }
+  } 
   
   #feedbackText {
     height: 42px;

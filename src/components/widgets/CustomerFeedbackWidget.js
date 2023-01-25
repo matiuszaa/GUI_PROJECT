@@ -42,7 +42,7 @@ const CustomerFeedbackWidget = ({data}) => {
             width: "100%",
             height: "100%"
         }}>
-        <div className="WidgetsPadding">
+        <div className="">
             <div className="customerFeedbackHeader">
                 <Link to="/feedback" style={{ textDecoration: 'none' }}>
                     <Typography variant="widgetHeader">
@@ -50,7 +50,7 @@ const CustomerFeedbackWidget = ({data}) => {
                     </Typography>
                 </Link>
             </div>
-            <div>
+            <div className='customerWidgetPadding'>
                 <CustomSelect defaultValue="pozytywne" onChange={changeHandler}>
                     <CustomMenuItem value="pozytywne">{ln("positiveOpinion")}</CustomMenuItem>
                     <CustomMenuItem value="wszystkie">{ln("all")}</CustomMenuItem>
@@ -75,7 +75,7 @@ const CustomerFeedbackWidget = ({data}) => {
                             color="textSecondary">
                             {Math.floor((new Date() - feed.date) / (1000 * 60 * 60 * 24))} {ln("ago")}
                         </Typography>
-                        <Rating name="half-rating" precision={0.5} value={feed.rating} size="small" readOnly="true" />
+                        <Rating name="half-rating" precision={0.5} value={feed.rating} size="small" readOnly={true} />
                     </div>
                     
                 }

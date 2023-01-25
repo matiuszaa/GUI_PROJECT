@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DashboardLayout from "./DashboardLayout";
 import { accountNames, FirstAccountData,EmptyAccountData, DataMock} from "../../data/user";
 import { AppBar, Tab, Tabs, Typography } from "@mui/material";
+import { RequiredAuth } from "../../context/ctxAuth";
 
 const Dashboard = ({accountName, login, setLogin}) => {
   const dataRequester = new DataMock();
@@ -23,7 +24,7 @@ const Dashboard = ({accountName, login, setLogin}) => {
   };
 
   return (     
-    <div>
+    <RequiredAuth>
       <div>
         <div className='CustomRoot'></div>
           <AppBar position="static">
@@ -47,7 +48,7 @@ const Dashboard = ({accountName, login, setLogin}) => {
             offerData={state.offerRankingData}
         />
       </div>
-    </div>
+    </RequiredAuth>
   )
 }
 

@@ -3,36 +3,48 @@ import { AppHeader } from './components/AppHeader';
 import Dashboard from './components/menu/Dashboard';
 import {theme} from './components/common/commoncomp';
 import { ThemeProvider } from '@emotion/react';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 import Login from './components/auth/Login'
 import CustomerFeedbackPage from './components/page/CustomerFeedbackPage';
+import { ctxAuth } from './context/ctxAuth';
 
 function App() {
-  const [login, setLogin] = useState('');
-  const [accountName, setAccountName] = useState('firstAccount')
-  useEffect(() => {
-    let log = localStorage.getItem('login');
-    if( log ){
-      setLogin(log);
-    }
-  }, []);
+  const [accountName, setAccountName] = useState('firstAccount');
+  const [authState, setAuthState] = useState({
+    isLogged: false,
+    logged: null
+  });
+
+  const login = (username) => {
+    setAuthState({
+      isLogged: true,
+      logged: username
+    });
+  };
+
+  const logout = () => {
+    setAuthState({
+      isLogged: false,
+      logged: null
+    });
+  };
 
   return (
-
-    <BrowserRouter>
-        <ThemeProvider theme = {theme}>
-        <div className="App">
-            <AppHeader></AppHeader>
-                <Routes>
-                    <Route path='/login' element={<Login login={login} setLogin={setLogin} />} />
-                    <Route path='/' element={<Dashboard accountName={accountName} login={login} setLogin={setLogin} />} />
-                    <Route path="/feedback" element={<CustomerFeedbackPage/>} />
-                </Routes>
-            </div>
-        </ThemeProvider>
-    </BrowserRouter>  
-
+    <ctxAuth.Provider value={{ authState, login, logout }}>
+      <BrowserRouter>
+          <ThemeProvider theme = {theme}>
+          <div className="App">
+              <AppHeader></AppHeader>
+                  <Routes>
+                      <Route path='/login' element={<Login />} />
+                      <Route path='/' element={<Dashboard />} />
+                      <Route path="/feedback" element={<CustomerFeedbackPage/>} />
+                  </Routes>
+              </div>
+          </ThemeProvider>
+      </BrowserRouter>  
+    </ctxAuth.Provider>
   );
 }
 

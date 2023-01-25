@@ -7,7 +7,7 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { CustomToggleButton } from "../common/commoncomp";
-import { Translation, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import './css/widgets.css';
 import './css/orderWidget.css';
@@ -27,11 +27,11 @@ const OrderWidget = () => {
           <span><Typography variant="tableContent">Ilość:</Typography> </span>
           <span>{content}</span>
           <div>
-            <CustomToggleButton style={{backgroundColor: "#ce6d1e"}} size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
+            <CustomToggleButton value={1} style={{backgroundColor: "#ce6d1e"}} size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
               {ln('seeMore')}</Typography></CustomToggleButton>
             {
               content === 0
-              ? <CustomToggleButton style={{backgroundColor: "lightblue"}} className='line' size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
+              ? <CustomToggleButton value={1} style={{backgroundColor: "lightblue"}} className='line' size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
                 {ln('seeAdvice')}</Typography></CustomToggleButton>
               : null 
             }
