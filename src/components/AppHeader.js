@@ -26,6 +26,10 @@ export const AppHeader = ({login, setLogin}) => {
         i18n.changeLanguage(langImage === plPicture ? "en" : "pl");
         setLangImage(langImage === enPicture ? plPicture : enPicture);
     }
+
+    const handleThemeChange = () => {
+        setTheme(theme === '' ? 'dark' : '');
+    }
     
     return(
         <div className={`AppHeader ${theme}`}>
@@ -34,9 +38,7 @@ export const AppHeader = ({login, setLogin}) => {
                     Dashboard
                 </Typography>
             </Link>
-            <div className="theme" onClick={() => {
-                setTheme(theme === '' ? 'dark' : '')
-            }}>
+            <div className="theme" onClick={handleThemeChange}>
                 <Avatar src={light}/>
             </div>
             <Avatar 

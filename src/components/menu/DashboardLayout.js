@@ -24,8 +24,8 @@ const DashboardLayout = (props) => {
       <div id="SecondRow">
         <CustomerFeedbackWidget data={props.feedbackData}/>
         <div className="rightSecondRow">
-          <OrderWidget />
-          <SalesQualityWidget />
+          <OrderWidget data={props.ordersData}/>
+          <SalesQualityWidget data={props.qualityMark} />
           <SalesAdviceWidget />
         </div>
       </div>

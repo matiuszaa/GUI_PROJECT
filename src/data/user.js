@@ -112,8 +112,39 @@ feedbackData : {
             viewTimes: 250,
             },
         ],
-        
     },
+    orders: {
+        unpaid: 120,
+        notsend: 50,
+        returned: 10,
+    },
+    qualityMark: [
+        {
+            size: 100,
+            name: 'qualitySales',
+            current: 63,
+        },
+        {
+            size: 70,
+            name: 'qualityClients',
+            current: 22,
+        },
+        {
+            size: 60,
+            name: 'qualityReturn',
+            current: 23,
+        },
+        {
+            size: 30,
+            name: 'qualityService',
+            current: 21,
+        },
+        {
+            size: 10,
+            name: 'qualityPrices',
+            current: 6,
+        }
+    ],
 
     salesChartData : {
         dataDays: [
@@ -332,7 +363,39 @@ export const EmptyAccountData =
             { name: '22', piecesSold: 13 ,previousPiecesSold: 130 },
             { name: '23', piecesSold: 12 ,previousPiecesSold: 125 },
         ],
-    }
+    },
+    orders: {
+        unpaid: 0,
+        notsend: 0,
+        returned: 0,
+    },
+    qualityMark: [
+        {
+            size: 0,
+            name: 'qualitySales',
+            current: 0,
+        },
+        {
+            size: 0,
+            name: 'qualityClients',
+            current: 0,
+        },
+        {
+            size: 0,
+            name: 'qualityReturn',
+            current: 0,
+        },
+        {
+            size: 0,
+            name: 'qualityService',
+            current: 0,
+        },
+        {
+            size: 0,
+            name: 'qualityPrices',
+            current: 0,
+        }
+    ]
 } 
 
 export class DataMock {

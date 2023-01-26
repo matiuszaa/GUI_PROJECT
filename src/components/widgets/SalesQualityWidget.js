@@ -16,34 +16,6 @@ import { ctxTheme } from "../../context/ctxTheme";
 import "./css/widgets.css";
 import "./css/SalesQualityWidget.css"
 
-const ocean = [
-  {
-    size: 100,
-    name: 'qualitySales',
-    current: 50,
-  },
-  {
-    size: 60,
-    name: 'qualityClients',
-    current: 20,
-  },
-  {
-    size: 20,
-    name: 'qualityReturn',
-    current: 16,
-  },
-  {
-    size: 80,
-    name: 'qualityService',
-    current: 60,
-  },
-  {
-    size: 0,
-    name: 'qualityPrices',
-    current: 0,
-  }
-]
-
 const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
   height: 10,
   borderRadius: 5,
@@ -98,34 +70,34 @@ const QualityPanel = ({value, o, ln}) => {
   )
 }
 
-const SalesQualityWidget = () => {
-  let [suma, setSuma] = useState(0);
-  let [suma1, setSuma1] = useState(0);
+const SalesQualityWidget = ({data}) => {
+  let [sumOfCurrent, setSumOfCurrent] = useState(0);
+  let [sumOfTotal, setSumOfTotal] = useState(0);
   const {theme} = useContext(ctxTheme);
   const [ln, i18n] = useTranslation();
 
   useEffect(() => {
-    suma = 0;
-    suma1 = 0;
-    ocean.map(o => {
-      suma += o.current;
-      suma1 += o.size;
+    sumOfCurrent = 0;
+    sumOfTotal = 0;
+    data.map(o => {
+      sumOfCurrent += o.current;
+      sumOfTotal += o.size;
     })
-    setSuma(suma);
-    setSuma1(suma1);
+    setSumOfCurrent(sumOfCurrent);
+    setSumOfTotal(sumOfTotal);
   }, [])
 
-  const [value, setValue] = React.useState(0);
+  const [valueSelected, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const wynik = (ln) => (<strong>{
-    (suma / suma1 * 100) <= 20 ? ln('qualityBad') : 
-    (suma / suma1 * 100) <= 40 ? ln('qualiztyNotToBad') : 
-    (suma / suma1 * 100) <= 60 ? ln('qualityItsOk') : 
-    (suma / suma1 * 100) <= 80 ? ln('qualityNotBad') : 
-    (suma / suma1 * 100) <= 100 ? ln('qualityVeryGood') : null}</strong>)
+    (sumOfCurrent / sumOfTotal * 100) <= 20 ? ln('qualityBad') : 
+    (sumOfCurrent / sumOfTotal * 100) <= 40 ? ln('qualiztyNotToBad') : 
+    (sumOfCurrent / sumOfTotal * 100) <= 60 ? ln('qualityItsOk') : 
+    (sumOfCurrent / sumOfTotal * 100) <= 80 ? ln('qualityNotBad') : 
+    (sumOfCurrent / sumOfTotal * 100) <= 100 ? ln('qualityVeryGood') : null}</strong>)
 
   return (
     <div className={`SalesQualityWidget ${theme}`}>
@@ -147,7 +119,7 @@ const SalesQualityWidget = () => {
         </div>
 
         <Box sx={{ width: '100%', typography: 'body1' }}>
-          <TabContext value={'' + value}>
+          <TabContext value={'' + valueSelected}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList className="tablist" onChange={handleChange} aria-label="lab API tabs example">
                 <Tab label={<Typography variant="tableAndNameHeaders">{ln('qualitySummarise')}</Typography>} value={'0'} />
@@ -160,10 +132,10 @@ const SalesQualityWidget = () => {
             </Box>
               <TabPanel className="tabpanel" value={'0'}>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-                  {ln('qualityMaxMark')}: {suma1}
+                  {ln('qualityMaxMark')}: {sumOfTotal}
                 </Typography>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
-                  {ln('qualityCurrentMark')}: {suma}
+                  {ln('qualityCurrentMark')}: {sumOfCurrent}
                 </Typography>
                 <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
                   {ln('qualityCategory')}: {wynik(ln)}
@@ -173,7 +145,7 @@ const SalesQualityWidget = () => {
                   <Typography variant="h5" align="left" color="text.secondary" gutterBottom>
                     {ln('qualityAspectsBad')}: 
                     <ul>
-                      {[...ocean].sort((a, b) => 
+                      {[...data].sort((a, b) => 
                         a.current / a.size > b.current / b.size ? 1 : -1
                       ).filter(a => a.size !== 0).slice(0,3).map((a, key) => 
                         <li key={key}>{ln(a.name)}</li>
@@ -183,7 +155,7 @@ const SalesQualityWidget = () => {
                 </div>
 
               </TabPanel>
-              {ocean.map((o, idx) => 
+              {data.map((o, idx) => 
                 <QualityPanel key={idx} value={idx + 1} o={o} ln={ln} />
               )}
           </TabContext>

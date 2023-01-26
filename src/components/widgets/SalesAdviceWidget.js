@@ -15,7 +15,7 @@ import "./css/widgets.css";
 
 
 const SalesAdviceWidget = () => {
-  const [list, setList] = useState([
+  const [adviceList, setList] = useState([
     'advice1',
     'advice2',
     'advice3'
@@ -25,9 +25,9 @@ const SalesAdviceWidget = () => {
   const {theme} = useContext(ctxTheme);
 
   const random = () => {
-    let t = Math.floor(Math.random() * list.length);
+    let t = Math.floor(Math.random() * adviceList.length);
     while(t === ran){
-      t = Math.floor(Math.random() * list.length);
+      t = Math.floor(Math.random() * adviceList.length);
     }
     setRan(t);
   }
@@ -41,7 +41,7 @@ const SalesAdviceWidget = () => {
           </Typography>
 
           <Typography className="bodyAdvice" sx={{ fontSize: 12, textAlign:'left' }} color="text.secondary" gutterBottom>
-            {ln(list[ran])}
+            {ln(adviceList[ran])}
           </Typography>
         </CardContent>
         <CardActions className="algin-right">

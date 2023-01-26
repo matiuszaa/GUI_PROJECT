@@ -13,7 +13,9 @@ const Dashboard = () => {
     accountNames: "FIRST",
     salesChartData: FirstAccountData['salesChartData'],
     feedbackData: FirstAccountData['feedbackData'],
-    offerRankingData: FirstAccountData['offerRankingData']
+    offerRankingData: FirstAccountData['offerRankingData'],
+    ordersData: FirstAccountData['orders'],
+    qualityMark: FirstAccountData['qualityMark']
   })
 
   const handleChildValueChange = (e) => {
@@ -22,7 +24,9 @@ const Dashboard = () => {
         accountName: e.target.innerText,
         salesChartData: data['salesChartData'],
         feedbackData: data['feedbackData'],
-        offerRankingData: data['offerRankingData']
+        offerRankingData: data['offerRankingData'],
+        ordersData: data['orders'],
+        qualityMark: data['qualityMark']
     });
   };
 
@@ -49,6 +53,8 @@ const Dashboard = () => {
             salesChartData={state.salesChartData}
             feedbackData={state.feedbackData}
             offerData={state.offerRankingData}
+            ordersData={state.ordersData}
+            qualityMark={state.qualityMark}
         />
       </div>
     </RequiredAuth>

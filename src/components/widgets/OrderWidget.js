@@ -14,8 +14,8 @@ import { ctxTheme } from "../../context/ctxTheme";
 import './css/widgets.css';
 import './css/orderWidget.css';
 
-const OrderWidget = () => {
-  const [value, setValue] = React.useState('1');
+const OrderWidget = ({data}) => {
+  const [valueSelected, setValue] = React.useState('1');
   const [ln, i18n] = useTranslation();
   const {theme} = useContext(ctxTheme);
 
@@ -52,7 +52,7 @@ const OrderWidget = () => {
         backgroundColor: "background.paper",
         }}>
       <Box sx={{ width: '100%', typography: 'body1' }}>
-        <TabContext value={value}>
+        <TabContext value={valueSelected}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label={<Typography variant = "tableAndNameHeaders">{ln('unPaid')}</Typography>} value="1" />
@@ -60,9 +60,9 @@ const OrderWidget = () => {
               <Tab label={<Typography variant = "tableAndNameHeaders">{ln("returned")}</Typography>} value="3" />
             </TabList>
           </Box>
-          <TP value={'1'} content={120} ln={ln} />
-          <TP value={'2'} content={3} ln={ln}/>
-          <TP value={'3'} content={0} ln={ln}/>
+          <TP value={'1'} content={data.unpaid} ln={ln} />
+          <TP value={'2'} content={data.notsend} ln={ln}/>
+          <TP value={'3'} content={data.returned} ln={ln}/>
         </TabContext>
       </Box>
       </Paper>
