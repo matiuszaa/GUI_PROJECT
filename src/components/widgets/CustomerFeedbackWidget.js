@@ -65,7 +65,7 @@ const CustomerFeedbackWidget = ({data}) => {
             {feedbackData.map((feed) => (
             <ListItem key={feed.author} alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar src="/static/images/avatar/1.jpg" />
+                    <Avatar src={feed.avatar ? feed.avatar : "/static/images/avatar/1.jpg"} />
                 </ListItemAvatar>
                 <ListItemText
                     primary={

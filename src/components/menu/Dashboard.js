@@ -10,7 +10,7 @@ const Dashboard = () => {
   const dataRequester = new DataMock();
   const { theme } = useContext(ctxTheme);
   const [state, setState] = useState({
-    accountNames: "FIRST",
+    accountName: "FIRST",
     salesChartData: FirstAccountData['salesChartData'],
     feedbackData: FirstAccountData['feedbackData'],
     offerRankingData: FirstAccountData['offerRankingData'],
@@ -40,7 +40,8 @@ const Dashboard = () => {
               <Tab
                 key={account}
                 value={account}
-                label={<Typography variant="account">{account}</Typography>}
+                style={{backgroundColor: account === state.accountName ? "#FFD12D" : "#FAFF11"}}
+                label={<Typography variant="account" style={{fontWeight: account === state.accountName ? "bold" : ""}}>{account}</Typography>}
                 onClick={handleChildValueChange}
                 className=' tabSelector'
               />
