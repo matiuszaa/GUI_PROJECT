@@ -8,9 +8,11 @@ import { useState } from 'react';
 import Login from './components/auth/Login'
 import CustomerFeedbackPage from './components/page/CustomerFeedbackPage';
 import { ctxAuth } from './context/ctxAuth';
+import { ctxTheme } from './context/ctxTheme';
 
 function App() {
   const [accountName, setAccountName] = useState('firstAccount');
+  const [theme, setTheme] = useState('');
   const [authState, setAuthState] = useState({
     isLogged: false,
     logged: null
@@ -32,9 +34,10 @@ function App() {
 
   return (
     <ctxAuth.Provider value={{ authState, login, logout }}>
+      <ctxTheme.Provider value={{ theme, setTheme }}>
       <BrowserRouter>
-          <ThemeProvider theme = {theme}>
-          <div className="App">
+          {/* <ThemeProvider theme = {theme}> */}
+          <div className={`App ${theme}`}>
               <AppHeader></AppHeader>
                   <Routes>
                       <Route path='/login' element={<Login />} />
@@ -42,8 +45,9 @@ function App() {
                       <Route path="/feedback" element={<CustomerFeedbackPage/>} />
                   </Routes>
               </div>
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
       </BrowserRouter>  
+      </ctxTheme.Provider>
     </ctxAuth.Provider>
   );
 }

@@ -3,11 +3,16 @@
 }
 
 .DashboardLayout {
-  
+  /* margin: ; */
 }
 
 .Page {
     position: relative;
     width: 100vw;
     height: 100vh;
+}
+
+.CustomSelectedTab.dark {
+  background-color: #F6C839 !important;
+  color: black !important;
 }

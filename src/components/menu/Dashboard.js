@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DashboardLayout from "./DashboardLayout";
-import { accountNames, FirstAccountData,EmptyAccountData, DataMock} from "../../data/user";
+import { accountNames, FirstAccountData, EmptyAccountData, DataMock} from "../../data/user";
 import { AppBar, Tab, Tabs, Typography } from "@mui/material";
 import { RequiredAuth } from "../../context/ctxAuth";
+import './css/dashboard.css';
+import { ctxTheme } from "../../context/ctxTheme";
 
-const Dashboard = ({accountName, login, setLogin}) => {
+const Dashboard = () => {
   const dataRequester = new DataMock();
+  const { theme } = useContext(ctxTheme);
   const [state, setState] = useState({
     accountNames: "FIRST",
     salesChartData: FirstAccountData['salesChartData'],
@@ -26,20 +29,20 @@ const Dashboard = ({accountName, login, setLogin}) => {
   return (     
     <RequiredAuth>
       <div>
-        <div className='CustomRoot'></div>
-          <AppBar position="static">
-            <Tabs
-              className='CustomSelectedTab'
-              >{accountNames.map((account) => (
-                <Tab
-                  key={account}
-                  value={account}
-                  label={<Typography variant="account">{account}</Typography>}
-                  onClick={handleChildValueChange}
-                />
-              ))}
-            </Tabs>
-          </AppBar>
+        <AppBar position="static">
+          <Tabs
+            className={`CustomSelectedTab ${theme}`}
+            >{accountNames.map((account) => (
+              <Tab
+                key={account}
+                value={account}
+                label={<Typography variant="account">{account}</Typography>}
+                onClick={handleChildValueChange}
+                className=' tabSelector'
+              />
+            ))}
+          </Tabs>
+        </AppBar>
         </div>
       <div className="Dashboard">
         <DashboardLayout className="DashboardLayout" 

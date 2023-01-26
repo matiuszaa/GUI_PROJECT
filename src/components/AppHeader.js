@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -14,11 +14,13 @@ import { useTranslation } from "react-i18next";
 import "./AppHeader.css"
 
 import Logout from "./auth/Logout";
+import { ctxTheme } from "../context/ctxTheme";
 
 
 export const AppHeader = ({login, setLogin}) => {
     const [langImage, setLangImage] = useState(enPicture);
     const [ln, i18n] = useTranslation();
+    const { theme, setTheme } = useContext(ctxTheme);
 
     const handleLanguageChange = () => {
         i18n.changeLanguage(langImage === plPicture ? "en" : "pl");
@@ -26,13 +28,15 @@ export const AppHeader = ({login, setLogin}) => {
     }
     
     return(
-        <div className="AppHeader">
-            <Link to="/" className="title" style={{ textDecoration: 'none', color: 'black' }}>
+        <div className={`AppHeader ${theme}`}>
+            <Link to="/" className="titleHeader" style={{ textDecoration: 'none'}}>
                 <Typography variant="titleHeader">
                     Dashboard
                 </Typography>
             </Link>
-            <div className="theme">
+            <div className="theme" onClick={() => {
+                setTheme(theme === '' ? 'dark' : '')
+            }}>
                 <Avatar src={light}/>
             </div>
             <Avatar 

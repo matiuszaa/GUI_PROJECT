@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 
-import { Box, Card, CardContent, Tab } from "@material-ui/core";
+import { Box, Tab } from "@material-ui/core";
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 
 import {
@@ -10,6 +10,8 @@ import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgres
 import {styled} from '@mui/material/styles'
 
 import { useTranslation } from "react-i18next";
+
+import { ctxTheme } from "../../context/ctxTheme";
 
 import "./css/widgets.css";
 import "./css/SalesQualityWidget.css"
@@ -99,6 +101,7 @@ const QualityPanel = ({value, o, ln}) => {
 const SalesQualityWidget = () => {
   let [suma, setSuma] = useState(0);
   let [suma1, setSuma1] = useState(0);
+  const {theme} = useContext(ctxTheme);
   const [ln, i18n] = useTranslation();
 
   useEffect(() => {
@@ -125,7 +128,7 @@ const SalesQualityWidget = () => {
     (suma / suma1 * 100) <= 100 ? ln('qualityVeryGood') : null}</strong>)
 
   return (
-    <div className="SalesQualityWidget">
+    <div className={`SalesQualityWidget ${theme}`}>
       <Paper
         sx={{
           boxShadow: 4,
@@ -135,7 +138,7 @@ const SalesQualityWidget = () => {
           height: "100%"
         }}
       >
-        <div className="header">
+        <div className="header title">
           <Typography
               variant="widgetHeader"
           >

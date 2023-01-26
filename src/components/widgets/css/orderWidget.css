@@ -29,3 +29,11 @@
 .tab {
   padding: 0 10px;
 }
+
+.orders.dark div {
+  background-color: rgb(126, 124, 124);
+  color: #F6C839;
+}
+.orders div.see button {
+  color: white;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   Card,
@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 
 import { useTranslation } from "react-i18next";
+
+import { ctxTheme } from "../../context/ctxTheme";
 
 import "./css/widgets.css";
 
@@ -20,6 +22,7 @@ const SalesAdviceWidget = () => {
   ]);
   const [ran, setRan] = useState(0);
   const [ln, i18n] = useTranslation();
+  const {theme} = useContext(ctxTheme);
 
   const random = () => {
     let t = Math.floor(Math.random() * list.length);
@@ -30,19 +33,19 @@ const SalesAdviceWidget = () => {
   }
 
   return (
-    <div className="SalesAdviceWidget">
+    <div className={`SalesAdviceWidget ${theme}`}>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 16, textAlign:'left' }} color="text.first" gutterBottom>
+          <Typography className="title" sx={{ fontSize: 16, textAlign:'left' }} color="text.first" gutterBottom>
             {ln('adviceTitle')}
           </Typography>
 
-          <Typography sx={{ fontSize: 12, textAlign:'left' }} color="text.secondary" gutterBottom>
+          <Typography className="bodyAdvice" sx={{ fontSize: 12, textAlign:'left' }} color="text.secondary" gutterBottom>
             {ln(list[ran])}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={random}>{ln('adviceNext')}</Button>
+        <CardActions className="algin-right">
+          <Button size="medium" onClick={random}>{ln('adviceNext')}</Button>
         </CardActions>
       </Card>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -18,6 +18,7 @@ import { Translation, useTranslation } from 'react-i18next'
 
 import "./css/widgets.css"
 import "./css/OfferRankingWidget.css"
+import { ctxTheme } from '../../context/ctxTheme';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const OfferRankingWidget = ({data}) => {
     const [selectedValue, setSelectedValue] = useState('najlepsze');
     const [offerData, setOfferData] = useState(data.bestOffers);
+    const {theme} = useContext(ctxTheme);
     const [ln, i18n] = useTranslation();
 
     const changeHandler = (event) => {
@@ -58,7 +60,7 @@ const OfferRankingWidget = ({data}) => {
     };
 
     return (    
-    <div className='OfferRankingWidget'>
+    <div className={`OfferRankingWidget ${theme}`}>
         <Paper sx={{
             boxShadow: 4,
             borderRadius: 5,
@@ -74,20 +76,20 @@ const OfferRankingWidget = ({data}) => {
                     justifyContent: "flex-start"
                 }}
             >
-                <div style={{display:'flex', justifyContent: 'space-between'}}>
+                <div className='title' style={{display:'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
                     <Typography variant="widgetHeader">
                         {ln("offerRanking")}
                     </Typography>
                 </div>
-                <CustomSelect defaultValue="najlepsze" onChange={changeHandler}>
-                    <CustomMenuItem value="najlepsze">
+                <CustomSelect className={`selectValue ${theme}`} defaultValue="najlepsze" onChange={changeHandler}>
+                    <CustomMenuItem className={`selectValueli ${theme}`} value="najlepsze">
                         {ln("best")}
                     </CustomMenuItem>
-                    <CustomMenuItem value={"najgorsze"}>
+                    <CustomMenuItem className={`selectValueli ${theme}`} value={"najgorsze"}>
                         {ln("worst")}
                     </CustomMenuItem>
                 </CustomSelect>
-                <TableContainer>
+                <TableContainer className={`table ${theme}`}>
                     <Table className={useStyles.table} aria-label="custom table"
                         sx={{
                             [`& .${tableCellClasses.root}`]: {

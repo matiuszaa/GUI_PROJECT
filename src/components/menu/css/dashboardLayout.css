@@ -1,21 +1,28 @@
 .DashboardLayout {
-    margin: 50px;
+    margin: 50px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #FirstRow {
     width: 80vw !important;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
 
 #SecondRow {
     width: 80vw !important;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
 
 #ThirdRow {
     display: flex;
+    margin: 0 auto;
     justify-content: space-between;
 }
 

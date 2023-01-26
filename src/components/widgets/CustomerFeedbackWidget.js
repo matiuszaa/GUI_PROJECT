@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import List from '@material-ui/core/List';
@@ -16,11 +16,13 @@ import { useTranslation } from 'react-i18next'
 
 import "./css/widgets.css"
 import "./css/CustomerFeedbackWidget.css"
+import { ctxTheme } from '../../context/ctxTheme';
 
 
 const CustomerFeedbackWidget = ({data}) => {
     const [feedbackData, setFeedBackData] = useState(data.best);
     const [sort, setSort] = useState('positiveOpinion');
+    const {theme} = useContext(ctxTheme);
     const [ln, i18n] = useTranslation();
 
     const changeHandler = (event) => {
@@ -33,8 +35,9 @@ const CustomerFeedbackWidget = ({data}) => {
         }
     };
 
+
     return (
-    <div className="CustomerFeedbackWidget">
+    <div className={`CustomerFeedbackWidget ${theme}`}>
         <Paper sx={{
             boxShadow: 4,
             borderRadius: 5,
@@ -43,7 +46,7 @@ const CustomerFeedbackWidget = ({data}) => {
             height: "100%"
         }}>
         <div className="">
-            <div className="customerFeedbackHeader">
+            <div className="customerFeedbackHeader title">
                 <Link to="/feedback" style={{ textDecoration: 'none' }}>
                     <Typography variant="widgetHeader">
                         {ln("customerFeedback")}
@@ -51,10 +54,10 @@ const CustomerFeedbackWidget = ({data}) => {
                 </Link>
             </div>
             <div className='customerWidgetPadding'>
-                <CustomSelect defaultValue="pozytywne" onChange={changeHandler}>
-                    <CustomMenuItem value="pozytywne">{ln("positiveOpinion")}</CustomMenuItem>
-                    <CustomMenuItem value="wszystkie">{ln("all")}</CustomMenuItem>
-                    <CustomMenuItem value="negatywne">{ln("negativeOpinion")}</CustomMenuItem>
+                <CustomSelect className={`selectValue ${theme}`} defaultValue="pozytywne" onChange={changeHandler}>
+                    <CustomMenuItem className={`selectValueli ${theme}`} value="pozytywne">{ln("positiveOpinion")}</CustomMenuItem>
+                    <CustomMenuItem className={`selectValueli ${theme}`} value="wszystkie">{ln("all")}</CustomMenuItem>
+                    <CustomMenuItem className={`selectValueli ${theme}`} value="negatywne">{ln("negativeOpinion")}</CustomMenuItem>
                 </CustomSelect>
             </div>
         </div>

@@ -12,6 +12,20 @@
   line-height: 40px;
 }
 
+.OfferRankingWidget.dark div {
+  background-color: rgb(126, 124, 124) !important;
+  color: #F6C839 !important;
+}
+
 .WidgetsPadding {
   height: calc(500px - 30px);
 }
+
+.table.dark * {
+  color: white !important;
+}
+
+.table.dark th span {
+  color: #F6C839 !important;
+}
+

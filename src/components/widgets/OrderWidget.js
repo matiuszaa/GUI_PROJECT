@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import { TabContext, TabList, TabPanel } from "@material-ui/lab";
 
@@ -9,12 +9,15 @@ import { Box } from "@mui/system";
 import { CustomToggleButton } from "../common/commoncomp";
 import { useTranslation } from "react-i18next";
 
+import { ctxTheme } from "../../context/ctxTheme";
+
 import './css/widgets.css';
 import './css/orderWidget.css';
 
 const OrderWidget = () => {
   const [value, setValue] = React.useState('1');
   const [ln, i18n] = useTranslation();
+  const {theme} = useContext(ctxTheme);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -26,7 +29,7 @@ const OrderWidget = () => {
         <div className="tp">
           <span><Typography variant="tableContent">Ilość:</Typography> </span>
           <span>{content}</span>
-          <div>
+          <div className="see">
             <CustomToggleButton value={1} style={{backgroundColor: "#ce6d1e"}} size="small" variant="outlined"><Typography variant="buttonsAndSelectLabel">
               {ln('seeMore')}</Typography></CustomToggleButton>
             {
@@ -42,7 +45,7 @@ const OrderWidget = () => {
   }
   
   return (
-    <div className="orders">
+    <div className={`orders ${theme}`}>
       <Paper className='paper' sx={{
         boxShadow: 4,
         borderRadius: 1,

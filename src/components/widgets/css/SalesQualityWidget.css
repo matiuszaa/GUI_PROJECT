@@ -22,3 +22,24 @@
   position: absolute;
   bottom: 30px;
 }
+
+.SalesQualityWidget.dark div  {
+  background: rgb(126, 124, 124);
+}
+
+.SalesQualityWidget.dark h5 {
+  color: #F6C839;
+}
+
+.SalesQualityWidget.dark button,
+.SalesQualityWidget.dark p {
+  color: white;
+}
+
+
+.SalesQualityWidget.dark .basaspects h5 {
+  color: white;
+}
+.basaspects h5 ul {
+  padding: 20px !important;
+}

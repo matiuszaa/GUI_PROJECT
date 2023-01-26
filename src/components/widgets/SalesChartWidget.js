@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { BarChart, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Bar, Line } from 'recharts';
 
 import {
   Paper,
-  ToggleButton,
-  ToggleButtonGroup,
   Avatar,
 } from "@mui/material";
 import { Typography } from '@mui/material';
-import { styled } from "@mui/material/styles";
 
 import { CustomMenuItem, CustomSelect, CustomToggleButton, CustomToggleButtonGroup } from '../common/commoncomp';
 import { useTranslation } from "react-i18next";
@@ -16,11 +13,14 @@ import { useTranslation } from "react-i18next";
 import barChartPicture from "./../../data/photos/barChart.webp"
 import linearChartPicture from "./../../data/photos/linearChart.png"
 
+import { ctxTheme } from "../../context/ctxTheme";
+
 import "./css/widgets.css"
 import "./css/SalesChartWidget.css"
 
 const SalesChartWidget = ({data}) => {
   const [ln, i18n] = useTranslation();
+  const {theme} = useContext(ctxTheme);
   let [chartType, setChartType] = useState('bar');
   let [selectedValue, setSelectedValue] = useState('amount')
   let [dataType, setDataType] = useState('days');
@@ -46,8 +46,13 @@ const SalesChartWidget = ({data}) => {
 
   const toggleCurrentPeriod = () => setCurrentPeriod(!currentPeriod);
 
+  const style = {
+    color1: theme === 'dark' ? '#123456' : '#8884d8' ,
+    color2: theme === 'dark' ? '#76bb11' : '#32CD32' ,
+  }
+
   return (
-    <div className='charWidget'>
+    <div className={`charWidget ${theme}`}>
       <Paper 
         sx={{
           boxShadow: 4,
@@ -57,16 +62,16 @@ const SalesChartWidget = ({data}) => {
           height: "100%"
         }}>        
         <div className='WidgetsPadding'>
-          <div className='salesChartWidgetHeader'>
+          <div className='salesChartWidgetHeader title'>
             <Typography variant="widgetHeader">
               {ln("salesChart")}
             </Typography>
             <div>
-              <CustomSelect defaultValue='amount' onChange={changeHandler}>
-                <CustomMenuItem value='amount'>
+              <CustomSelect className={`selectValue ${theme}`} defaultValue='amount' onChange={changeHandler}>
+                <CustomMenuItem className={`selectValueli ${theme}`} value='amount'>
                   {ln('amount')}
                 </CustomMenuItem>
-                <CustomMenuItem value='turnover'>
+                <CustomMenuItem className={`selectValueli ${theme}`} value='turnover'>
                   {ln('turnover')}
                 </CustomMenuItem>
               </CustomSelect>
@@ -125,18 +130,18 @@ const SalesChartWidget = ({data}) => {
               <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
               <Tooltip />
               <Legend />
-              {currentPeriod ? <Bar dataKey={selectedValue === "amount" ? "currentAmount" : "piecesSold"} name={ln("currentPeriod")} fill="#8884d8" tooltip={{label: ln("currentPeriod")}}/> : ""}
-              {previousPeriod ? <Bar dataKey={selectedValue === "amount" ? "previousAmount" : "previousPiecesSold"} name={ln("previousPeriod")} tooltip={{label: ln("previousPeriod")}} fill="#32CD32"  /> : ""}
+              {currentPeriod ? <Bar dataKey={selectedValue === "amount" ? "currentAmount" : "piecesSold"} name={ln("currentPeriod")} fill={style.color1} tooltip={{label: ln("currentPeriod")}}/> : ""}
+              {previousPeriod ? <Bar dataKey={selectedValue === "amount" ? "previousAmount" : "previousPiecesSold"} name={ln("previousPeriod")} tooltip={{label: ln("previousPeriod")}} fill={style.color2}  /> : ""}
             </BarChart>) 
             : (
             <LineChart width={800} height={300} data={dataToUse}>
-                <XAxis dataKey="name" tickFormatter={(tick) => ln(tick)} />
-                <YAxis />
+                <XAxis className='xAxis' dataKey="name" tickFormatter={(tick) => ln(tick)} />
+                <YAxis className='yAxis' />
                 <CartesianGrid stroke="#ccc" strokeDasharray="4 4" />
                 <Tooltip />
                 <Legend />
-                {currentPeriod ? <Line type="monotone" dataKey={selectedValue === "amount" ? "currentAmount" : "piecesSold"} strokeWidth={3} name={ln("currentPeriod")} stroke="#8884d8" tooltip={{label: ln("currentPeriod")}} /> : ""}
-                {previousPeriod ? <Line type="monotone" dataKey={selectedValue === "amount" ? "previousAmount" : "previousPiecesSold"} strokeWidth={3} name={ln("previousPeriod")} stroke="#32CD32" tooltip={{label: ln("previousPeriod")}} /> : ""}
+                {currentPeriod ? <Line type="monotone" dataKey={selectedValue === "amount" ? "currentAmount" : "piecesSold"} strokeWidth={3} name={ln("currentPeriod")} stroke={style.color1} tooltip={{label: ln("currentPeriod")}} /> : ""}
+                {previousPeriod ? <Line type="monotone" dataKey={selectedValue === "amount" ? "previousAmount" : "previousPiecesSold"} strokeWidth={3} name={ln("previousPeriod")} stroke={style.color2} tooltip={{label: ln("previousPeriod")}} /> : ""}
             </LineChart>)
           }
         </div>

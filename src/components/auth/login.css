@@ -5,12 +5,18 @@
   transform: translateY(-50%) translateX(-50%);
 }
 .loginPage {
-    width: 1000px;
+    height: calc(100vh - 80px);
+    width: 100vw;
     background-color: #FFFDD0;
+}
+
+.login h1 {
+  color: black;
 }
 
 .login > * {
   display: block;
+  color: inherit;
 }
 
 .login div {
@@ -18,9 +24,34 @@
   margin: 15px;
 }
 
-
 .login button {
   display: block;
   width: 150px;
   margin: 20px auto;
+}
+
+.dark {
+  background-color: rgb(49, 49, 49);
+  color: white !important;
+}
+
+.loginPage.dark .login h1 {
+  color: white;
+}
+
+.loginPage.dark .login div {
+  color: white;
+}
+
+.loginPage.dark .login button {
+  color: black;
+  background-color: #F6C839;
+}
+
+.login input.dark {
+  color: white !important;
+}
+
+.logout {
+  cursor: pointer;
 }

@@ -22,4 +22,20 @@
 }
 .button-spacing {
     margin-bottom: 10px;
-  }
+}
+
+.charWidget.dark {
+    background-color: rgb(126, 124, 124);
+}
+
+.charWidget.dark > div {
+    background-color: inherit;
+}
+
+.charWidget.dark *{
+    color: #F6C839;
+}
+
+.charWidget.dark g {
+    color: white !important;
+}
